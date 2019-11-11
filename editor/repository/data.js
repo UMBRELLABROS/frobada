@@ -12,8 +12,11 @@ fbdDivDataRaw = `[{
       "border-radius":"10px",
       "boxShadow":"4px 4px 4px #ccc",
       "text-align":"center",
-      "cursor":"pointer"     
-    }
+      "cursor":"pointer"          
+    }    
+  },
+  "data":{
+    "destination":"fbd3"
   },
   "classes":[
     "abs"

@@ -33,6 +33,7 @@ function initElements() {
   setAttributes(elements, fbdDivData);
   setInnerHTML(elements, fbdDivData);
   setEventHandler(elements, fbdDivData);
+  setDataAttributes(elements, fbdDivData);
 }
 
 /**
@@ -66,12 +67,35 @@ function setAttribute(element, attributes) {
   }
 }
 
+function setDataAttributes(elements, fbdDivData) {
+  elements.map(element => {
+    data = fbdDivData.find(x => {
+      if (x.div === element) return x;
+    }).data;
+    if (data) {
+      setDataAttribute($(element), data);
+    }
+  });
+}
+
+function setDataAttribute(element, data) {
+  for ([key, value] of Object.entries(data)) {
+    if (typeof value === "object") {
+      setDataAttribute(element[key], value);
+    } else {
+      element.setAttribute('data-' + key, value);
+    }
+  }
+}
+
+
 function setEvents(element, events) {
   for ([key, value] of Object.entries(events)) {
     if (typeof value === "object") {
       setEvents(element, value);
     } else {
-      element.addEventListener(key, value);
+      func = fbdHandler[value];
+      element.addEventListener(key, func);
     }
   }
 }
