@@ -1,0 +1,58 @@
+fbdDivDataRaw = `[{
+  "div":"fbd1", 
+  "attributes":{
+    "style":{
+      "position": "absolute",    
+      "left": "100px",
+      "top": "10px",
+      "width":"200px",    
+      "height":"30px",
+      "background-color":"#dad",
+      "border":"solid 1px #666",
+      "border-radius":"10px",
+      "boxShadow":"4px 4px 4px #ccc",
+      "text-align":"center",
+      "cursor":"pointer"     
+    }
+  },
+  "classes":[
+    "abs"
+  ],
+  "events":[{"click":"addContainer"}],
+  "innerHTML":"new container"
+},
+{"div":"fbd2", 
+  "attributes":{
+    "style":{
+      "position": "absolute",    
+      "left": "0px",
+      "top": "100px",
+      "width":"100%",    
+      "height":"100%",
+      "background-color":"#999"                  
+    }
+  },
+  "classes":[
+    "abs"
+  ],
+  "events":[],
+  "innerHTML":""
+},
+{"div":"fbd3", 
+  "attributes":{
+    "style":{
+      "position": "absolute",    
+      "left": "100px",
+      "top": "100px",
+      "right":"100px",    
+      "height":"100%",
+      "background-color":"#fff"                  
+    }
+  },
+  "classes":[
+    "abs"
+  ],
+  "events":[],
+  "innerHTML":""
+}
+]`;
