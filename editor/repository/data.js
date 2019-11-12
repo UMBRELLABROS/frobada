@@ -6,13 +6,14 @@ fbdDivDataRaw = `[{
       "left": "100px",
       "top": "10px",
       "width":"200px",    
-      "height":"30px",
-      "background-color":"#dad",
-      "border":"solid 1px #666",
+      "height":"auto",
+      "background-color":"#808",
+      "border":"solid 1px #333",
       "border-radius":"10px",
-      "boxShadow":"4px 4px 4px #ccc",
+      "boxShadow":"4px 4px 4px #666",
       "text-align":"center",
-      "cursor":"pointer"          
+      "cursor":"pointer",
+      "color":"#fff"              
     }    
   },
   "data":{
@@ -57,5 +58,32 @@ fbdDivDataRaw = `[{
   ],
   "events":[],
   "innerHTML":""
+},
+{
+  "div":"fbd4", 
+  "attributes":{
+    "style":{
+      "position": "absolute",    
+      "left": "400px",
+      "top": "10px",
+      "width":"200px",    
+      "height":"auto",
+      "background-color":"#808",
+      "border":"solid 1px #333",
+      "border-radius":"10px",
+      "boxShadow":"4px 4px 4px #666",
+      "text-align":"center",
+      "cursor":"pointer",
+      "color":"#fff"          
+    }    
+  },
+  "data":{
+    "destination":"fbd3"
+  },
+  "classes":[
+    "abs"
+  ],
+  "events":[{"click":"save"}],
+  "innerHTML":"save"
 }
 ]`;
