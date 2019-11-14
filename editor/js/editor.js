@@ -9,24 +9,47 @@ fbdHandler['saveDOM'] = saveDOM;
 function addContainer(event) {
   // put new container to display
   var destination = event.target.getAttribute('data-destination');
-  addElementToParent(destination);
+  addElementToParent($(destination));
 }
 
 function addElementToParent(destination) {
+  // New element
   div = dCE("div");
+  div.id = "fdb5";
   div.style.width = "100px";
   div.style.height = "100px";
   div.style.backgroundColor = "#d00";
-  $(destination).appendChild(div);
+
+  // test child
+  divChild = dCE("div");
+  divChild.id = "fdb7";
+  divChild.style.width = "50px";
+  divChild.style.height = "10px";
+  div.appendChild(divChild);
+
+  // test child
+  divChild2 = dCE("div");
+  divChild2.id = "fdb8";
+  divChild2.style.width = "50px";
+  divChild2.style.height = "10px";
+  div.appendChild(divChild2);
+
+  destination.appendChild(div);
 }
 
 function saveDOM(event) {
   var source = event.target.getAttribute('data-source');
-  elements = [];
-  elements = scanDOM(source, elements);
+  var elements = [];
+  var structure = [];
+  elements = scanDOM($(source), elements);
+  structure = scanDOMStructure($(source), structure)
+  console.log(JSON.stringify(structure));
+
+
   // string has only numbers
   // ^ start [0-9] numbers + more of that kind $ end
   var reg = new RegExp('^[0-9]+$');
+
   // for each DIV scan the style properties !=""
   // get the id
   // get the data-attributes
@@ -45,14 +68,34 @@ function saveDOM(event) {
 }
 
 function scanDOM(source, elements) {
-
-  nodes = $(source).childNodes;
+  var nodes = source.childNodes;
   nodes.forEach(element => {
     if (element.nodeName == "DIV") {
       elements.push(element);
+      if (element.childNodes.length > 0) {
+        elements = scanDOM(element, elements);
+      }
     }
   });
   return elements;
+}
+
+function scanDOMStructure(source, structure) {
+  var nodes = source.childNodes;
+  nodes.forEach(element => {
+    if (element.nodeName == "DIV") {
+      var objDIV = {
+        "nodeName": "DIV",
+        "id": element.id,
+        "childNodes": []
+      }
+      structure.push(objDIV);
+      if (element.childNodes.length > 0) {
+        objDIV.childNodes = (scanDOMStructure(element, []));
+      }
+    }
+  });
+  return structure;
 }
 
 function colorToHex(color) {
