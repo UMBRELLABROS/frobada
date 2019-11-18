@@ -7,7 +7,7 @@ var Ajax = function() {
   var async = true;
   var responseType = "";
   // public
-  this.PHPPath = ""; // path to server
+  this.URL = ""; // path to server
 
   // pupblic functions
   this.post = postData; //post request
@@ -22,7 +22,7 @@ var Ajax = function() {
     init.apply(this, arguments);
   }
   function init() {
-    this.PHPPath = arguments[0];
+    this.URL = arguments[0];
     this.returnFunction(arguments[1]);
   }
 
@@ -46,26 +46,31 @@ var Ajax = function() {
 
   // post request
   function postData(formData) {
-    client.open("post", this.PHPPath, async);
-    client.send(formData); /* Send to server */
+    send(this.URL, "post", formData);
   }
 
   // put request
   function putData(formData) {
-    client.open("put", this.PHPPath, async);
-    client.send(formData); /* Send to server */
+    send(this.URL, "put", formData);
   }
 
   // get request
   function getData() {
-    client.open("get", this.PHPPath, async);
-    client.send(); /* Send to server */
+    send(this.URL, "get");
   }
 
   // delete request
-  function deleteData(formData) {
-    client.open("delete", this.PHPPath, async);
-    client.send(); /* Send to server */
+  function deleteData() {
+    send(this.URL, "delete");
+  }
+
+  function send(url, type, payload) {
+    client.open(type, url, async);
+    if (payload) {
+      client.send(payload);
+    } else {
+      client.send();
+    } /* Send to server */
   }
 
   // store callback

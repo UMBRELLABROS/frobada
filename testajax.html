@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <script src="editor/js/ajax.js"></script>
+    <script src="editor/js/functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="editor/css/style.css" />
+  </head>
+
+  <script>
+    // setup ajax
+    var dto = new Ajax("http://localhost:1234", showJSON);
+    var dtoUser = new Ajax();
+
+    function showJSON(result) {
+      alert(result);
+    }
+
+    function getData() {
+      dto.get();
+    }
+
+    function postData() {
+      formData = new FormData();
+      formData.append("Key", "Value 123");
+      dto.post(formData);
+    }
+
+    function postDataUser(userId) {
+      formData = new FormData();
+      formData.append("Key", "User " + userId);
+      dtoUser.URL = "http://localhost:1234/user/userId";
+      dtoUser.returnFunction(showJSON);
+      dtoUser.post(formData);
+    }
+  </script>
+
+  <body>
+    <button onclick="getData()" type="button">GET DATA</button>
+    <button onclick="postData()" type="button">POST DATA</button>
+    <br /><br />
+    <button onclick="postDataUser(2)" type="button">POST DATA to user/2</button>
+  </body>
+</html>

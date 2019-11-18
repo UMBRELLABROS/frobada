@@ -1,13 +1,6 @@
 <?php
 $method = $_SERVER['REQUEST_METHOD'];
 
-// get date
-
-
-
-
-
-
 
 switch($method){
     case "GET":
@@ -23,9 +16,5 @@ switch($method){
         echo json_encode($arr);
     break;
 }
-    
-
-
-
 
 ?>
