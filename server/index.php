@@ -1,5 +1,6 @@
 <?php
  header("Access-Control-Allow-Origin: *");
+ header("Access-Control-Allow-Methods 'GET, POST, PUT, DELETE'");
    
  // start server here with
  // php -S localhost:1324
@@ -17,6 +18,10 @@ $routes = array(
 		'controller'   => 'controler/user.ctrl.php'
 	),
 	array(
+		'path_pattern' => '/^database$/',
+		'controller'   => 'controler/database.ctrl.php'
+	),
+	array(
 		'path_pattern' => '/^company\/search\/autocomplete\/(?P<filter>[a-z_]+)$/',
 		'controller'   => 'controler/company-search-autocomplete.ctrl.php'
 	)
@@ -30,6 +35,8 @@ function router($routes)
 	$route_match = false;
 	$url_path    = 'index';
 	$url_params  = array();
+
+	echo($_GET['path']." ");
 	
 	if(isset($_GET['path']))
 	{
@@ -38,6 +45,7 @@ function router($routes)
 		{
 			$url_path = substr($url_path,0,-1);
 		}
+		echo($url_path." ");
 	}
 
 	
@@ -59,6 +67,7 @@ function router($routes)
 	
 	if(file_exists($route['controller']))
 	{
+		echo($route['controller']);
 		include($route['controller']);
 	}
 	else

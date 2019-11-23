@@ -10,6 +10,7 @@
     // setup ajax
     var dto = new Ajax("http://localhost:1234", showJSON);
     var dtoUser = new Ajax();
+    var dtoDB = new Ajax();
 
     function showJSON(result) {
       alert(result);
@@ -32,6 +33,19 @@
       dtoUser.returnFunction(showJSON);
       dtoUser.post(formData);
     }
+
+    function putDatabase(databaseId) {
+      formData = new FormData();
+      formData.append("database", databaseId);
+      dtoDB.URL = "http://localhost:1234/database";
+      dtoDB.returnFunction(showJSON);
+      dtoDB.put(formData);
+    }
+    function getDatabase(databaseId) {
+      dtoDB.URL = "http://localhost:1234/database";
+      dtoDB.returnFunction(showJSON);
+      dtoDB.get();
+    }
   </script>
 
   <body>
@@ -39,5 +53,12 @@
     <button onclick="postData()" type="button">POST DATA</button>
     <br /><br />
     <button onclick="postDataUser(2)" type="button">POST DATA to user/2</button>
+    <br /><br />
+    <button onclick="putDatabase('testdb')" type="button">
+      PUT DATABASE database
+    </button>
+    <button onclick="getDatabase('testdb')" type="button">
+      GET DATABASE database
+    </button>
   </body>
 </html>
