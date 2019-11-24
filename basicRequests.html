@@ -10,6 +10,10 @@
   <script>
     // setup ajax
     var dto = new Ajax("http://localhost:1234/basicfunctions.php ", showJSON);
+    var dtoRoute = new Ajax(
+      "http://localhost:1234/basicfunctions.php ",
+      showJSON
+    );
 
     // return function
     function showJSON(result) {
@@ -38,6 +42,10 @@
     function deleteData() {
       dto.delete();
     }
+    function checkRoute(path) {
+      dtoRoute.URL = "http://localhost:1234/" + path;
+      dtoRoute.get();
+    }
   </script>
 
   <body>
@@ -49,5 +57,18 @@
     <br /><br />
     <button onclick="deleteData()" type="button">DELETE DATA</button>
     <br /><br />
+
+    <!-- Router-test-->
+    <button onclick="checkRoute('')" type="button">INDEX</button>
+    <button onclick="checkRoute('index')" type="button">INDEX</button>
+    <button onclick="checkRoute('user/4')" type="button">
+      USER EDIT 4
+    </button>
+    <button
+      onclick="checkRoute('company/search/autocomplete/german')"
+      type="button"
+    >
+      autocomplete filter german
+    </button>
   </body>
 </html>

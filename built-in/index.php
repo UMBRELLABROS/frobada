@@ -1,12 +1,5 @@
-<?php
- header("Access-Control-Allow-Origin: *");
- header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-   
- // start server here with
- // php -S localhost:1324
+<?php 
 
-// router for URL
-// http://www.stephan-romhart.de/artikel/performantes-url-routing-php-regex
 
 $routes = array(
 	array(
@@ -30,14 +23,14 @@ $routes = array(
 function router($routes)
 {
 
-
-
 	$route_match = false;
 	$url_path    = 'index';
 	$url_params  = array();	
 	
 	if(isset($_GET['path']))
 	{
+        echo($_GET['path']);
+
 		$url_path = $_GET['path'];
 		if(substr($url_path,-1) == '/')
 		{
@@ -46,13 +39,14 @@ function router($routes)
 	}
 
 	
-	
 	foreach($routes as $route)
 	{
 		if(preg_match($route['path_pattern'],$url_path,$matches))
 		{
+            // $matches contains () values like '/^user\/(?P<user_id>\d+)$/' : user_id 
 			$url_params  = array_merge($url_params,$matches);
-			$route_match = true;
+            $route_match = true;
+            print_r($matches);
 			break;
 		}
 	}
@@ -65,7 +59,10 @@ function router($routes)
 	if(file_exists($route['controller']))
 	{
 		echo($route['controller']);
-		include($route['controller']);
+        include($route['controller']);
+        
+        // set $matches here
+        
 	}
 	else
 	{
@@ -73,6 +70,6 @@ function router($routes)
 	}
 }
 
-router($routes);
+
 
 ?>
