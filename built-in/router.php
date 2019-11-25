@@ -1,16 +1,13 @@
 <?php
- header("Access-Control-Allow-Origin: *");
- header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 // php -S localhost:1234 router.php
 
+// Send routes to index.php without .htaccess
 
 chdir(__DIR__);
 $path=ltrim($_SERVER["REQUEST_URI"], '/');
 $filePath = realpath($path);
-
-
-echo($path."\n");
-echo($filePath."\n");
 
 if ($filePath && is_dir($filePath)){
     // attempt to find an index file
@@ -23,7 +20,7 @@ if ($filePath && is_dir($filePath)){
 }
 
 if ($filePath && is_file($filePath)) {
-    echo("-2a");
+    
     // 1. check that file is not outside of this directory for security
     // 2. check for circular reference to router.php
     // 3. don't serve dotfiles
@@ -44,11 +41,10 @@ if ($filePath && is_file($filePath)) {
         echo "404 Not Found";
     }
 } else {
-    echo($filePath."\n");
-    // rewrite to our index file
-    include __DIR__ . DIRECTORY_SEPARATOR . 'index.php';
+    // rewrite to the index file
     $_GET['path']=$path;
-    router($routes);
+    include __DIR__ . DIRECTORY_SEPARATOR . 'index.php';
     
+      
 }
 ?>

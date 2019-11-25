@@ -20,6 +20,8 @@ $routes = array(
 	)
 );
 
+
+
 function router($routes)
 {
 
@@ -29,7 +31,7 @@ function router($routes)
 	
 	if(isset($_GET['path']))
 	{
-        echo($_GET['path']);
+        // echo($_GET['path']);
 
 		$url_path = $_GET['path'];
 		if(substr($url_path,-1) == '/')
@@ -45,8 +47,7 @@ function router($routes)
 		{
             // $matches contains () values like '/^user\/(?P<user_id>\d+)$/' : user_id 
 			$url_params  = array_merge($url_params,$matches);
-            $route_match = true;
-            print_r($matches);
+            $route_match = true;            
 			break;
 		}
 	}
@@ -58,11 +59,11 @@ function router($routes)
 	
 	if(file_exists($route['controller']))
 	{
-		echo($route['controller']);
+		// echo($route['controller']);
         include($route['controller']);
         
         // set $matches here
-        
+
 	}
 	else
 	{
@@ -70,6 +71,6 @@ function router($routes)
 	}
 }
 
-
+router($routes); 
 
 ?>
