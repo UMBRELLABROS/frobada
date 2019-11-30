@@ -1,0 +1,15 @@
+[
+  { "path_pattern": "/^index$/", "controller": "controller/index.ctrl.php" },
+  {
+    "path_pattern": "/^user\\/(?P<user_id>\\d+)$/",
+    "controller": "controller/user.ctrl.php"
+  },
+  {
+    "path_pattern": "/^database$/",
+    "controller": "controller/database.ctrl.php"
+  },
+  {
+    "path_pattern": "/^company\\/search\\/autocomplete\\/(?P<filter>[a-z_]+)$/",
+    "controller": "controller/company-search-autocomplete.ctrl.php"
+  }
+]

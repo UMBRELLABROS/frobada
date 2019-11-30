@@ -1,25 +1,6 @@
 <?php 
 
-
-$routes = array(
-	array(
-		'path_pattern' => '/^index$/',
-		'controller'   => 'controller/index.ctrl.php'
-	),	
-	array(
-		'path_pattern' => '/^user\/(?P<user_id>\d+)$/',
-		'controller'   => 'controller/user.ctrl.php'
-	),
-	array(
-		'path_pattern' => '/^database$/',
-		'controller'   => 'controller/database.ctrl.php'
-	),
-	array(
-		'path_pattern' => '/^company\/search\/autocomplete\/(?P<filter>[a-z_]+)$/',
-		'controller'   => 'controller/company-search-autocomplete.ctrl.php'
-	)
-);
-
+include("router-links.php");
 
 
 function router($routes)
