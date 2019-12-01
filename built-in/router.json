@@ -5,7 +5,7 @@
     "controller": "controller/user.ctrl.php"
   },
   {
-    "path_pattern": "/^database$/",
+    "path_pattern": "/^database\\/(?P<name>[a-z_]+)$/",
     "controller": "controller/database.ctrl.php"
   },
   {

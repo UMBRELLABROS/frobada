@@ -25,8 +25,7 @@ class Request{
             break;
             case "PUT":
                 // read data
-                $this->object = json_decode(file_get_contents("php://input"), true);
-                $arr = array('Type' => $method,  'site' => $actual_link);               
+                $this->object = json_decode(file_get_contents("php://input"), true);                
             break;
             
         }

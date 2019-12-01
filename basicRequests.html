@@ -47,6 +47,19 @@
       dtoRoute.URL = "http://localhost:1234/" + path;
       dtoRoute.get();
     }
+
+    function dbCreate(path) {
+      dtoRoute.URL = "http://localhost:1234/" + path;
+      dtoRoute.put();
+    }
+    function dbDelete(path) {
+      dtoRoute.URL = "http://localhost:1234/" + path;
+      dtoRoute.delete();
+    }
+    function dbCheck(path) {
+      dtoRoute.URL = "http://localhost:1234/" + path;
+      dtoRoute.get();
+    }
   </script>
 
   <body>
@@ -70,6 +83,17 @@
       type="button"
     >
       autocomplete filter german
+    </button>
+    <!-- CREATE databse-->
+    <br /><br />
+    <button onclick="dbCreate('database/mytest')" type="button">
+      Create Database mytest
+    </button>
+    <button onclick="dbDelete('database/mytest')" type="button">
+      Delete Database mytest
+    </button>
+    <button onclick="dbCheck('database/mytest')" type="button">
+      Check Database mytest
     </button>
   </body>
 </html>
