@@ -23,6 +23,9 @@ switch($ctrl->getMethod()){
         // delete database with database-name=name       
         $db->delete();
     break;
+    case "GET":
+        $db->listTables();
+    break;
 }
 
 // go to service depending on method

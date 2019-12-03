@@ -4,16 +4,11 @@
  * Handle database access
  */
 class database{
-    private $databaseName;
-    private $params;
+    private $databaseName;    
     private $conn;
 
     public function __construct($databaseName)
-    {
-        // load database parameters
-        // load an parse the JSON file
-        $paramsJsonFileContents = file_get_contents("database.json");
-        $this->params = json_decode($paramsJsonFileContents, true);
+    {        
         $this->databaseName = $databaseName;
     }
 
@@ -22,17 +17,20 @@ class database{
      */
     public function create(){
         $this->connect();
+        $message="";
         try {
             // setting the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "CREATE DATABASE $this->databaseName";
             // using exec() because no results are returned
             $this->conn->exec($sql);
-            echo "Database created successfully with the name $this->databaseName";
+            $message = "Database created successfully with the name $this->databaseName";
+            $ret = array('message' => $message, "error"=>null);  
         }
         catch(PDOException $e){
-            echo $e->getMessage();            
-        }            
+            $ret = array('message' => $message, "error"=>$e->getMessage());          
+        }    
+        echo(json_encode($ret)   );         
         $this->conn=null;
     }
 
@@ -41,17 +39,20 @@ class database{
      */
     public function delete(){
         $this->connect();
+        $message="";
         try {
             // setting the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "DROP DATABASE $this->databaseName";
             // using exec() because no results are returned
             $this->conn->exec($sql);
-            echo "Database $this->databaseName deleted successfully";
+            $message = "Database $this->databaseName deleted successfully";
+            $ret = array('message' => $message, "error"=>null);                        
         }
-        catch(PDOException $e){
-            echo $e->getMessage();            
-        }            
+        catch(PDOException $e){            
+            $ret = array('message' => $message, "error"=>$e->getMessage());           
+        }   
+        echo(json_encode($ret)   );         
         $this->conn=null;
     }
 
@@ -59,28 +60,47 @@ class database{
      * get the status of the database (tables) 
      * null, if it does not exists
      */
-    public function get(){
+    public function listTables(){
+        $this->connect();
+        $message="";
+        try {
+            // switch to database
+            $sql = "USE $this->databaseName";
+            $this->conn->exec($sql);
 
+            //Our SQL statement, which will select a list of tables from the current MySQL database.
+            $sql = "SHOW TABLES";
+            
+            //Prepare our SQL statement,
+            $statement = $this->conn->prepare($sql);
+            
+            //Execute the statement.
+            $statement->execute();
+            
+            //Fetch the rows from our statement.
+            $tables = $statement->fetchAll(PDO::FETCH_NUM);
+
+            if(count($tables)==0){
+                $message = "The database has no tables";
+            }
+                       
+            $ret = array('message' => $message, 'tables'=>$tables);                        
+
+        }
+        catch(PDOException $e){
+            $ret = array('message' => $message, "error"=>$e->getMessage());                       
+        }            
+        echo(json_encode($ret)   );
+        $this->conn=null;
     }
 
+    /**
+     * establish a connection
+     */
     private function connect(){         
-        $existingDatabase="umbrella";     
-        try {
-            try {
-                $this->conn = new PDO('mysql:host='.$this->params['servername'].';dbname='.$existingDatabase,
-                $this->params['username'], 
-                $this->params['password']);
-            }
-            catch(PDOException $e){
-                $this->conn = new PDO('mysql:host='.$this->params['servername'].';dbname='.$existingDatabase,
-                $this->params['username'], 
-                $this->params['password']);
-            }
-        }
-        catch(PDOException $e) {
-            echo($e);
-            exit('Unable to connect Database.');
-        }
+        require_once("DB.php");
+        $db= new db();
+        $this->conn = $db->connect();
     }
 
 }
