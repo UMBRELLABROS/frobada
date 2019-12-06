@@ -47,7 +47,7 @@
       dtoRoute.URL = "http://localhost:1234/" + path;
       dtoRoute.get();
     }
-
+    // Database
     function dbCreate(path) {
       dtoRoute.URL = "http://localhost:1234/" + path;
       dtoRoute.put();
@@ -59,6 +59,35 @@
     function dbCheck(path) {
       dtoRoute.URL = "http://localhost:1234/" + path;
       dtoRoute.get();
+    }
+    // table *************************************************************
+    function tableCreate(path) {
+      dtoRoute.URL = "http://localhost:1234/" + path;
+      var entries = [];
+      entries.push({
+        label: "firstname",
+        type: "VARCHAR(50)",
+        initValue: "NOT NULL"
+      });
+      entries.push({
+        label: "lastname",
+        type: "VARCHAR(60)",
+        initValue: "NOT NULL"
+      });
+      var json = JSON.stringify(entries);
+      dtoRoute.put();
+    }
+    function tableDelete(path) {
+      dtoRoute.URL = "http://localhost:1234/" + path;
+      dtoRoute.delete();
+    }
+    // Tabledata (write values to the table in the database)
+    function tabledataInsert() {
+      formData = new FormData();
+      formData.append("firstname", "Martin");
+      formData.append("lastname", "Stottmeister");
+      dtoRoute.URL = "http://localhost:1234/" + path;
+      dtoRoute.post(json);
     }
   </script>
 
@@ -84,7 +113,7 @@
     >
       autocomplete filter german
     </button>
-    <!-- CREATE databse-->
+    <!-- CREATE databse **************************************************** -->
     <br /><br />
     <button onclick="dbCreate('database/mytest')" type="button">
       Create Database mytest
@@ -94,6 +123,19 @@
     </button>
     <button onclick="dbCheck('database/mytest')" type="button">
       Check Database mytest
+    </button>
+    <!-- Tables **************************************************** -->
+    <br /><br />
+    <button onclick="tableCreate('table/mytest/users')" type="button">
+      Create Table users
+    </button>
+    <button onclick="tableDelete('table/mytest/users')" type="button">
+      Delete Table users
+    </button>
+    <!-- Tabledata **************************************************** -->
+    <br /><br />
+    <button onclick="tabledataInsert('tabledata/mytest/users')" type="button">
+      insert user
     </button>
   </body>
 </html>

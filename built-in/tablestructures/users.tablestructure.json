@@ -1,0 +1,4 @@
+[
+  { "label": "firstname", "type": "VARCHAR(40)", "default": "NOT NULL" },
+  { "label": "lastname", "type": "VARCHAR(60)", "default": "NOT NULL" }
+]

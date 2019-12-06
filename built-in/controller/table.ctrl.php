@@ -10,21 +10,22 @@ include("Request.php");
 $ctrl = new Request();
 
 // get server class for database
-include ("services/database.service.php");
-$db = new database($matches['name']);
+include ("services/table.service.php");
+
+$table = new Table($matches['database'], $matches['table']);
 
 // if method ="PUT"
 switch($ctrl->getMethod()){
     case "PUT":
         // create database with database-name=name               
-        $db->create();
+        $table->create($ctrl->object);
     break;
     case "DELETE":
         // delete database with database-name=name       
-        $db->delete();
+        $table->delete();
     break;
     case "GET":
-        $db->listTables();
+        
     break;
 }
 

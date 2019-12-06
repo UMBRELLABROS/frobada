@@ -9,6 +9,14 @@
     "controller": "controller/database.ctrl.php"
   },
   {
+    "path_pattern": "/^table\\/(?P<database>[a-z_]+)\\/(?P<table>[a-z_]+)$/",
+    "controller": "controller/table.ctrl.php"
+  },
+  {
+    "path_pattern": "/^tabledata\\/(?P<database>[a-z_]+)\\/(?P<table>[a-z_]+)$/",
+    "controller": "controller/tabledata.ctrl.php"
+  },
+  {
     "path_pattern": "/^company\\/search\\/autocomplete\\/(?P<filter>[a-z_]+)$/",
     "controller": "controller/company-search-autocomplete.ctrl.php"
   }

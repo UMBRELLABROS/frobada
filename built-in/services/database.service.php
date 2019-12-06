@@ -64,6 +64,8 @@ class database{
         $this->connect();
         $message="";
         try {
+            // setting the PDO error mode to exception
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // switch to database
             $sql = "USE $this->databaseName";
             $this->conn->exec($sql);
