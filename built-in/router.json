@@ -1,23 +1,27 @@
 [
-  { "path_pattern": "/^index$/", "controller": "controller/index.ctrl.php" },
-  {
-    "path_pattern": "/^user\\/(?P<user_id>\\d+)$/",
-    "controller": "controller/user.ctrl.php"
-  },
-  {
-    "path_pattern": "/^database\\/(?P<name>[a-z_]+)$/",
-    "controller": "controller/database.ctrl.php"
-  },
-  {
-    "path_pattern": "/^table\\/(?P<database>[a-z_]+)\\/(?P<table>[a-z_]+)$/",
-    "controller": "controller/table.ctrl.php"
-  },
-  {
-    "path_pattern": "/^tabledata\\/(?P<database>[a-z_]+)\\/(?P<table>[a-z_]+)$/",
-    "controller": "controller/tabledata.ctrl.php"
-  },
-  {
-    "path_pattern": "/^company\\/search\\/autocomplete\\/(?P<filter>[a-z_]+)$/",
-    "controller": "controller/company-search-autocomplete.ctrl.php"
-  }
+	{ "path_pattern": "/^index$/", "controller": "controller/index.ctrl.php" },
+	{
+		"path_pattern": "/^user\\/(?P<user_id>\\d+)$/",
+		"controller": "controller/user.ctrl.php"
+	},
+	{
+		"path_pattern": "/^database\\/(?P<name>[a-z_]+)$/",
+		"controller": "controller/database.ctrl.php"
+	},
+	{
+		"path_pattern": "/^table\\/(?P<database>[a-z_]+)\\/(?P<table>[a-z_]+)$/",
+		"controller": "controller/table.ctrl.php"
+	},
+	{
+		"path_pattern": "/^tabledata\\/(?P<database>[a-z_]+)\\/(?P<table>[a-z_]+)\\/(?P<where>[a-z_]+)\\/(?P<what>[a-z_0-9]+)$/",
+		"controller": "controller/tabledata.ctrl.php"
+	},
+	{
+		"path_pattern": "/^tabledata\\/(?P<database>[a-z_]+)\\/(?P<table>[a-z_]+)$/",
+		"controller": "controller/tabledata.ctrl.php"
+	},
+	{
+		"path_pattern": "/^company\\/search\\/autocomplete\\/(?P<filter>[a-z_]+)$/",
+		"controller": "controller/company-search-autocomplete.ctrl.php"
+	}
 ]

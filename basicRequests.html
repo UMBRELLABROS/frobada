@@ -1,141 +1,154 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <script src="editor/js/ajax.js"></script>
-    <script src="editor/js/functions.js"></script>
-    <link rel="stylesheet" type="text/css" href="editor/css/style.css" />
-  </head>
+	<head>
+		<meta charset="utf-8" />
+		<script src="editor/js/ajax.js"></script>
+		<script src="editor/js/functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="editor/css/style.css" />
+	</head>
 
-  <script>
-    // setup ajax
-    var dto = new Ajax("http://localhost:1234/basicfunctions.php ", showJSON);
-    var dtoRoute = new Ajax(
-      "http://localhost:1234/basicfunctions.php ",
-      showJSON
-    );
+	<script>
+		// setup ajax
+		var dto = new Ajax('http://localhost:1234/basicfunctions.php ', showJSON);
+		var dtoRoute = new Ajax('http://localhost:1234/basicfunctions.php ', showJSON);
 
-    // return function
-    function showJSON(result) {
-      alert(result);
-      console.log(result);
-    }
+		// return function
+		function showJSON(result) {
+			alert(result);
+			console.log(result);
+		}
 
-    function getData() {
-      dto.get();
-    }
+		function getData() {
+			dto.get();
+		}
 
-    function postData() {
-      formData = new FormData();
-      formData.append("Key", "Value 123");
-      dto.post(formData);
-    }
+		function postData() {
+			formData = new FormData();
+			formData.append('Key', 'Value 123');
+			dto.post(formData);
+		}
 
-    function putData() {
-      var data = {};
-      data.firstname = "John2";
-      data.lastname = "Snow2";
-      data.Key = "Value PUT";
-      var json = JSON.stringify(data);
-      dto.put(json);
-    }
+		function putData() {
+			var data = {};
+			data.firstname = 'John2';
+			data.lastname = 'Snow2';
+			data.Key = 'Value PUT';
+			var json = JSON.stringify(data);
+			dto.put(json);
+		}
 
-    function deleteData() {
-      dto.delete();
-    }
-    function checkRoute(path) {
-      dtoRoute.URL = "http://localhost:1234/" + path;
-      dtoRoute.get();
-    }
-    // Database
-    function dbCreate(path) {
-      dtoRoute.URL = "http://localhost:1234/" + path;
-      dtoRoute.put();
-    }
-    function dbDelete(path) {
-      dtoRoute.URL = "http://localhost:1234/" + path;
-      dtoRoute.delete();
-    }
-    function dbCheck(path) {
-      dtoRoute.URL = "http://localhost:1234/" + path;
-      dtoRoute.get();
-    }
-    // table *************************************************************
-    function tableCreate(path) {
-      dtoRoute.URL = "http://localhost:1234/" + path;
-      var entries = [];
-      entries.push({
-        label: "firstname",
-        type: "VARCHAR(50)",
-        initValue: "NOT NULL"
-      });
-      entries.push({
-        label: "lastname",
-        type: "VARCHAR(60)",
-        initValue: "NOT NULL"
-      });
-      var json = JSON.stringify(entries);
-      dtoRoute.put();
-    }
-    function tableDelete(path) {
-      dtoRoute.URL = "http://localhost:1234/" + path;
-      dtoRoute.delete();
-    }
-    // Tabledata (write values to the table in the database)
-    function tabledataInsert() {
-      formData = new FormData();
-      formData.append("firstname", "Martin");
-      formData.append("lastname", "Stottmeister");
-      dtoRoute.URL = "http://localhost:1234/" + path;
-      dtoRoute.post(json);
-    }
-  </script>
+		function deleteData() {
+			dto.delete();
+		}
+		function checkRoute(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.get();
+		}
+		// Database
+		function dbCreate(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.put();
+		}
+		function dbDelete(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.delete();
+		}
+		function dbCheck(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.get();
+		}
+		// table *************************************************************
+		function tableCreate(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			var entries = [];
+			entries.push({
+				label: 'firstname',
+				type: 'VARCHAR(50)',
+				initValue: 'NOT NULL'
+			});
+			entries.push({
+				label: 'lastname',
+				type: 'VARCHAR(60)',
+				initValue: 'NOT NULL'
+			});
+			var json = JSON.stringify(entries);
+			dtoRoute.put();
+		}
+		function tableDelete(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.delete();
+		}
+		// Tabledata (write values to the table in the database)
+		function tabledataInsert(path) {
+			formData = new FormData();
+			formData.append('firstname', 'Martin');
+			formData.append('lastname', 'Stottmeister');
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.post(formData);
+		}
+		function tabledataDelete(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.delete();
+		}
+		function tabledataUpdate(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			var entry = {
+				firstname: 'Hans',
+				lastname: 'Parker'
+			};
+			var json = JSON.stringify(entry);
+			dtoRoute.put(json);
+		}
+	</script>
 
-  <body>
-    <button onclick="getData()" type="button">GET DATA</button>
-    <br /><br />
-    <button onclick="postData()" type="button">POST DATA</button>
-    <br /><br />
-    <button onclick="putData()" type="button">PUT DATA</button>
-    <br /><br />
-    <button onclick="deleteData()" type="button">DELETE DATA</button>
-    <br /><br />
+	<body>
+		<button onclick="getData()" type="button">GET DATA</button>
+		<br /><br />
+		<button onclick="postData()" type="button">POST DATA</button>
+		<br /><br />
+		<button onclick="putData()" type="button">PUT DATA</button>
+		<br /><br />
+		<button onclick="deleteData()" type="button">DELETE DATA</button>
+		<br /><br />
 
-    <!-- Router-test-->
-    <button onclick="checkRoute('')" type="button">INDEX</button>
-    <button onclick="checkRoute('index')" type="button">INDEX</button>
-    <button onclick="checkRoute('user/4')" type="button">
-      USER EDIT 4
-    </button>
-    <button
-      onclick="checkRoute('company/search/autocomplete/german')"
-      type="button"
-    >
-      autocomplete filter german
-    </button>
-    <!-- CREATE databse **************************************************** -->
-    <br /><br />
-    <button onclick="dbCreate('database/mytest')" type="button">
-      Create Database mytest
-    </button>
-    <button onclick="dbDelete('database/mytest')" type="button">
-      Delete Database mytest
-    </button>
-    <button onclick="dbCheck('database/mytest')" type="button">
-      Check Database mytest
-    </button>
-    <!-- Tables **************************************************** -->
-    <br /><br />
-    <button onclick="tableCreate('table/mytest/users')" type="button">
-      Create Table users
-    </button>
-    <button onclick="tableDelete('table/mytest/users')" type="button">
-      Delete Table users
-    </button>
-    <!-- Tabledata **************************************************** -->
-    <br /><br />
-    <button onclick="tabledataInsert('tabledata/mytest/users')" type="button">
-      insert user
-    </button>
-  </body>
+		<!-- Router-test-->
+		<button onclick="checkRoute('')" type="button">INDEX</button>
+		<button onclick="checkRoute('index')" type="button">INDEX</button>
+		<button onclick="checkRoute('user/4')" type="button">
+			USER EDIT 4
+		</button>
+		<button onclick="checkRoute('company/search/autocomplete/german')" type="button">
+			autocomplete filter german
+		</button>
+		<!-- CREATE databse **************************************************** -->
+		<br /><br />
+		<button onclick="dbCreate('database/mytest')" type="button">
+			Create Database mytest
+		</button>
+		<button onclick="dbDelete('database/mytest')" type="button">
+			Delete Database mytest
+		</button>
+		<button onclick="dbCheck('database/mytest')" type="button">
+			Check Database mytest
+		</button>
+		<!-- Tables **************************************************** -->
+		<br /><br />
+		<button onclick="tableCreate('table/mytest/users')" type="button">
+			Create Table users
+		</button>
+		<button onclick="tableDelete('table/mytest/users')" type="button">
+			Delete Table users
+		</button>
+		<!-- Tabledata **************************************************** -->
+		<br /><br />
+		<button onclick="tabledataInsert('tabledata/mytest/users')" type="button">
+			insert user
+		</button>
+		<button onclick="tabledataUpdate('tabledata/mytest/users/id/1')" type="button">
+			update user 1
+		</button>
+		<button onclick="tabledataDelete('tabledata/mytest/users/id/1')" type="button">
+			delete user 1
+		</button>
+	</body>
 </html>

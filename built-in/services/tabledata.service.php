@@ -3,54 +3,71 @@
 /**
  * Handle tabledata
  */
-class Table{
+class TableData{
     private $databaseName;    
     private $table;    
     private $conn;
+    private $params;
 
     public function __construct($databaseName, $table)
     {        
         $this->databaseName = $databaseName;
-        $this->table = $table;        
+        $this->table = $table;       
+        // get structure from JSON: $table."tablestructure.json" 
+        // load an parse the JSON file
+        // check existance
+        $paramsJsonFileContents = file_get_contents("tablestructures/".$table.".tablestructure.json");
+        $this->params = json_decode($paramsJsonFileContents, true);   
     }
 
     /**
      * insert a new line to a table 
      * params : Tabledata, but not id and timestamp
      */
-    public function insert( $params){
+    public function insert( $itemdata ){
         $this->connect();
-        $message="";
+		$message="";
+		$newId=null;
         try {            
             // setting the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // READ data from structure
+            $labelArray = ArrayUtils::objArraySelect($this->params, "label");
+            $lables = implode($labelArray, ", ");
+            $qs = implode(array_fill(0,count($this->params),"?"),", "); // ?, ?, ? ,...
+
+            // Get the values (in the same order as $labelArray)
+            $values = ArrayUtils::getOrderedValues($itemdata, $labelArray);            
             
-            $sql = "INSERT INTO users (firstname, lastname) VALUES (?,?)";
-            $this->conn->prepare($sql)->execute([$firstname, $lastname]);
+            $sql = "INSERT INTO users ($lables) VALUES ($qs)";
+			$this->conn->prepare($sql)->execute($values);
+			$newId = $this->conn->lastInsertId();
 
             $message = "Item successfully added to table $this->table in database $this->databaseName";
-            $ret = array('message' => $message, "error"=>null);
+            $ret = array('message' => $message, "error"=>null, "id"=>$newId);
         }
         catch(PDOException $e){
-            $ret = array('message' => $message, "error"=>$e->getMessage());          
+            $ret = array('message' => $message, "error"=>$e->getMessage(), "id"=>null);          
         }    
         echo(json_encode($ret)   );         
         $this->conn = null;
     }
 
     /**
-     * delete an existing table 
+     * delete an existing table by where ...
      */
-    public function delete(){
+    public function delete($where, $what){
         $this->connect();
         $message="";
         try {
              // setting the PDO error mode to exception
-             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			 
+			 $sql = "DELETE FROM $this->table WHERE $where = '$what'";			
+			 $this->conn->exec($sql);
 
-            $message = "Table $this->table was deleted successfully in database $this->databaseName";
+            $message = "Entry $what was deletes from $this->table in database $this->databaseName";
             $ret = array('message' => $message, "error"=>null);
         }
         catch(PDOException $e){            
@@ -58,6 +75,53 @@ class Table{
         }   
         echo(json_encode($ret)   );         
         $this->conn = null;
+	}
+	
+	/**
+	 * Change the rows provided by itemdata
+	 */
+	public function update($where, $what, $itemdata){
+		$this->connect();
+		$message="";
+		$error=null;
+        try {
+			// setting the PDO error mode to exception
+			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$keys = array_keys($itemdata);
+			$values = array_values($itemdata);
+
+			// verify keys
+			$labelArray = ArrayUtils::objArraySelect($this->params, "label");
+			$ret = ArrayUtils::objArrayVerify($labelArray, $keys);
+			
+			if($ret){
+				$error = "invalid key: ".$ret;
+			}
+			else{
+				$set = "";
+				for($i=0;$i<count($keys);$i++){
+					$set .= $keys[$i]."='".$values[$i]."',";
+				}
+				$set = substr($set, 0, -1);				
+				$sql = "UPDATE $this->table SET $set WHERE $where = '$what'";			
+				$this->conn->exec($sql);
+				$message = "Entry $what was updated from $this->table in database $this->databaseName";
+			}
+            
+            $ret = array('message' => $message, "error"=>$error);
+        }
+        catch(PDOException $e){            
+            $ret = array('message' => $message, "error"=>$e->getMessage());           
+        }   
+        echo(json_encode($ret)   );         
+        $this->conn = null;
+	}
+
+    /**
+     * read only the labels from the structure
+     */
+    private function labelFilter($item){
+        return $item['label'];
     }
     
     /**
@@ -71,5 +135,51 @@ class Table{
 
 }
 
+class ArrayUtils
+{
+	/**
+	 * get only key parameters form array of objects
+	 */
+    public static function objArraySelect($array, $keyComparer)
+    {
+        $ret=[];    
+        foreach($array as $item){           
+            foreach ($item as $key => $value){
+                if($key == $keyComparer){
+                    array_push($ret,$value);
+                }
+            }
+        }
+       return $ret;
+	}
+	
+	/**
+	 * order the source array according to the order array and return the values
+	 */
+	public static function getOrderedValues($sourceArray, $orderArray){
+		$ret=[];
+		foreach($orderArray as $comparer){
+			foreach ($sourceArray as $key => $value){
+				if($key == $comparer){
+					array_push($ret,$value);
+				}
+			}
+		}
+		return $ret;
+	}
+
+	/**
+	 * test if elements of the test array are in the source array
+	 */
+	public static function objArrayVerify($sourceArray, $testArray){
+		foreach($testArray as $test){
+			if(!in_array($test, $sourceArray)){
+				return $test;	
+			}			
+		}
+		return null;
+	}
+
+}
 
 ?>
