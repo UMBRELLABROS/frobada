@@ -21,6 +21,10 @@
 		"controller": "controller/tabledata.ctrl.php"
 	},
 	{
+		"path_pattern": "/^jsonfile\\/(?P<repository>[a-z_0-9]+)\\/(?P<filename>[a-z_0-9]+)$/",
+		"controller": "controller/jsonfile.ctrl.php"
+	},
+	{
 		"path_pattern": "/^company\\/search\\/autocomplete\\/(?P<filter>[a-z_]+)$/",
 		"controller": "controller/company-search-autocomplete.ctrl.php"
 	}

@@ -99,6 +99,33 @@
 			var json = JSON.stringify(entry);
 			dtoRoute.put(json);
 		}
+		// JSON files
+		function jsonRead(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.get();
+		}
+		function jsonWrite(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			var entry = [
+				{
+					firstname: 'Hans',
+					lastname: 'Parker'
+				}
+			];
+			var json = JSON.stringify(entry);
+			dtoRoute.put(json);
+		}
+		function jsonAppend(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			formData = new FormData();
+			formData.append('firstname', 'JR');
+			formData.append('lastname', 'Ewing');
+			dtoRoute.post(formData);
+		}
+		function jsonDelete(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.delete();
+		}
 	</script>
 
 	<body>
@@ -149,6 +176,20 @@
 		</button>
 		<button onclick="tabledataDelete('tabledata/mytest/users/id/1')" type="button">
 			delete user 1
+		</button>
+		<!-- JSON **************************************************** -->
+		<br /><br />
+		<button onclick="jsonRead('jsonfile/repository/test')" type="button">
+			read test.json
+		</button>
+		<button onclick="jsonWrite('jsonfile/repository/test')" type="button">
+			write test.json
+		</button>
+		<button onclick="jsonAppend('jsonfile/repository/test')" type="button">
+			append to test.json
+		</button>
+		<button onclick="jsonDelete('jsonfile/repository/test')" type="button">
+			delete test.json
 		</button>
 	</body>
 </html>
