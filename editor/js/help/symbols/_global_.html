@@ -218,34 +218,6 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class _global_.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/_global_.html#fbdHandler">fbdHandler</a></b>
-								</div>
-								<div class="description">Module to enable editor functions</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-			
 
 <!-- ============================== methods summary ======================== -->
 			
@@ -266,7 +238,41 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/_global_.html#Ajax">Ajax</a></b>()
 								</div>
-								<div class="description">Ajax handle PUT, DELETE, GET and POST</div>
+								<div class="description">Ajax Object to hadle PUT, GET, DELETE and POST
+
+usage:
+var ajx = new Ajax(URL, callback);
+ajx.post(formData);
+ajx.put(json);
+ajx.delete();
+ajx.get()</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#callbackStructure">callbackStructure</a></b>(result)
+								</div>
+								<div class="description">load the structure</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#callbackStyles">callbackStyles</a></b>(result)
+								</div>
+								<div class="description">add the styles</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#DataHandling">DataHandling</a></b>()
+								</div>
+								<div class="description">Module to enable editor functions</div>
 							</td>
 						</tr>
 					
@@ -282,9 +288,31 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#initEditor">initEditor</a></b>()
+								</div>
+								<div class="description">Initialize the editor
+
+load structure and styles</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/_global_.html#initElements">initElements</a></b>()
 								</div>
 								<div class="description">Initial function</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#Layout">Layout</a></b>()
+								</div>
+								<div class="description">Layout
+
+Write the elements and andd the styles</div>
 							</td>
 						</tr>
 					
@@ -329,36 +357,6 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="fbdHandler"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>fbdHandler</b>
-					
-					</div>
-					<div class="description">
-						Module to enable editor functions
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/editor.js.html">editor.js</a>.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
 			
@@ -374,10 +372,123 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Ajax handle PUT, DELETE, GET and POST
+						Ajax Object to hadle PUT, GET, DELETE and POST
+
+usage:
+var ajx = new Ajax(URL, callback);
+ajx.post(formData);
+ajx.put(json);
+ajx.delete();
+ajx.get()
 						
 							<br />
 							<i>Defined in: </i> <a href="../symbols/src/ajax.js.html">ajax.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="callbackStructure"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>callbackStructure</b>(result)
+					
+					</div>
+					<div class="description">
+						load the structure
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/editor.js.html">editor.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>result</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="callbackStyles"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>callbackStyles</b>(result)
+					
+					</div>
+					<div class="description">
+						add the styles
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/editor.js.html">editor.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>result</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="DataHandling"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>DataHandling</b>()
+					
+					</div>
+					<div class="description">
+						Module to enable editor functions
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/datahandling.js.html">datahandling.js</a>.
 						
 						
 					</div>
@@ -422,6 +533,36 @@ ul.inheritsList
 
 					<hr />
 				
+					<a name="initEditor"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>initEditor</b>()
+					
+					</div>
+					<div class="description">
+						Initialize the editor
+
+load structure and styles
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/editor.js.html">editor.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="initElements"> </a>
 					<div class="fixedFont">
 					
@@ -434,6 +575,36 @@ ul.inheritsList
 						
 							<br />
 							<i>Defined in: </i> <a href="../symbols/src/functions.js.html">functions.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="Layout"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>Layout</b>()
+					
+					</div>
+					<div class="description">
+						Layout
+
+Write the elements and andd the styles
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/layout.js.html">layout.js</a>.
 						
 						
 					</div>
@@ -597,7 +768,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Dec 11 2019 13:17:19 GMT+0100 (MEZ)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sun Dec 15 2019 10:16:02 GMT+0100 (MEZ)
 		</div>
 	</body>
 </html>
