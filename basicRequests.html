@@ -99,6 +99,10 @@
 			var json = JSON.stringify(entry);
 			dtoRoute.put(json);
 		}
+		function tabledataRead(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.get();
+		}
 		// JSON files
 		function jsonRead(path) {
 			dtoRoute.URL = 'http://localhost:1234/' + path;
@@ -160,6 +164,7 @@
 		</button>
 		<!-- Tables **************************************************** -->
 		<br /><br />
+		<p>Structures are in <b>tablestructures/&lt;tablename&gt;.tablestructure.json</b></p>
 		<button onclick="tableCreate('table/mytest/users')" type="button">
 			Create Table users
 		</button>
@@ -168,6 +173,7 @@
 		</button>
 		<!-- Tabledata **************************************************** -->
 		<br /><br />
+
 		<button onclick="tabledataInsert('tabledata/mytest/users')" type="button">
 			insert user
 		</button>
@@ -176,6 +182,9 @@
 		</button>
 		<button onclick="tabledataDelete('tabledata/mytest/users/id/1')" type="button">
 			delete user 1
+		</button>
+		<button onclick="tabledataRead('tabledata/mytest/users/id/1')" type="button">
+			read user 1
 		</button>
 		<!-- JSON **************************************************** -->
 		<br /><br />

@@ -117,6 +117,41 @@ class TableData{
         $this->conn = null;
 	}
 
+	/**
+     * delete an existing table by where ...
+     */
+    public function read($where, $what){
+        $this->connect();
+		$message="";
+		$error=null;
+        try {
+			// setting the PDO error mode to exception
+			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+			$sql = "SELECT * FROM $this->table WHERE $where = '$what'";			
+			
+			$geta=array();  
+			$result = $this->conn->query($sql);
+			if(!$result)
+				$error="Syntax error: ".$sql;
+			
+			while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+				while(list($key,$value) = each($row)){
+					$getr[$key]=$value;
+				}
+				array_push($geta,$getr);
+			}
+
+            $message = $geta;
+            $ret = array('message' => $message, "error"=>$error);
+        }
+        catch(PDOException $e){            
+            $ret = array('message' => $message, "error"=>$e->getMessage());           
+        }   
+        echo(json_encode($ret)   );         
+        $this->conn = null;
+	}
+
     /**
      * read only the labels from the structure
      */

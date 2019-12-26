@@ -29,7 +29,8 @@ switch($ctrl->getMethod()){
         $tabledata->delete($matches['where'], $matches['what']);
     break;
     case "GET":
-        
+		// read the data from the line
+		$tabledata->read($matches['where'], $matches['what']);
     break;
 }
 

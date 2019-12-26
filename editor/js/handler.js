@@ -1,3 +1,6 @@
+/**
+ * handle events of the element
+ */
 var Handler = function() {
 	var funcs = new HandlerFunction();
 	this.loadFunctions = loadFunctions;

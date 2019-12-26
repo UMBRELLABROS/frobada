@@ -1,3 +1,7 @@
+/** data-attributes
+ *
+ * get and set the data-attributes
+ */
 var DataAttribute = function() {
 	this.loadAttributes = loadAttributes;
 

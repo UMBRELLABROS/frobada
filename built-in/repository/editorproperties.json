@@ -1,6 +1,6 @@
 [
 	{
-		"id": "fbd1",
+		"name": "fnm1",
 		"attributes": {
 			"style": {
 				"position": "absolute",
@@ -16,16 +16,10 @@
 				"cursor": "pointer",
 				"color": "#fff"
 			}
-		},
-		"data": {
-			"destination": "fbd3"
-		},
-		"classes": ["abs"],
-		"events": [{ "click": "addContainer" }],
-		"innerHTML": "new container"
+		}
 	},
 	{
-		"id": "fbd2",
+		"name": "fbd2",
 		"attributes": {
 			"style": {
 				"position": "absolute",
@@ -36,12 +30,10 @@
 				"background-color": "#999"
 			}
 		},
-		"classes": ["abs"],
-		"events": [],
-		"innerHTML": ""
+		"classes": ["abs"]
 	},
 	{
-		"id": "fbd3",
+		"name": "fnm3",
 		"attributes": {
 			"style": {
 				"position": "absolute",
@@ -52,12 +44,10 @@
 				"background-color": "#fff"
 			}
 		},
-		"classes": ["abs"],
-		"events": [],
-		"innerHTML": ""
+		"classes": ["abs"]
 	},
 	{
-		"id": "fbd4",
+		"name": "fnm4",
 		"attributes": {
 			"style": {
 				"position": "absolute",
@@ -74,11 +64,21 @@
 				"color": "#fff"
 			}
 		},
-		"data": {
-			"source": "fbd3"
+		"classes": ["abs"]
+	},
+	{
+		"name": "fbd5",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "700px",
+				"top": "10px",
+				"width": "200px",
+				"height": "60px",
+				"border": "solid 1px #333",
+				"border-radius": "2px"
+			}
 		},
-		"classes": ["abs"],
-		"events": [{ "click": "saveDOM" }],
-		"innerHTML": "save"
+		"classes": ["abs"]
 	}
 ]
