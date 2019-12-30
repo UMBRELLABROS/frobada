@@ -17,7 +17,7 @@ $table = new Table($matches['database'], $matches['table']);
 // if method ="PUT"
 switch($ctrl->getMethod()){
     case "PUT":
-        // create database with database-name=name               
+		// create database with database-name=name               		
         $table->create($ctrl->object);
     break;
     case "DELETE":

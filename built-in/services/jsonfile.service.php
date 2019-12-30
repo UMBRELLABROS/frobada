@@ -4,12 +4,18 @@
  * Handle table access
  */
 class JSONFile{
-    private $repository;    
+	private $repository;    // folder
+	private $silent = false; // silent mode
    
 
     public function __construct($repository)
     {        
         $this->repository = $repository;	   
+	}
+
+	/** change the silent mode */
+	public function setSilent($mode){
+		$this->silent = $mode;
 	}
 	
 	/**
@@ -17,8 +23,13 @@ class JSONFile{
 	 */
 	public function read($jsonfile){
 		// load an parse the JSON file        
-        $jsonFileContents = file_get_contents("$this->repository/$jsonfile.json");
-        echo( $jsonFileContents);  
+		$jsonFileContents = file_get_contents("$this->repository/$jsonfile.json");
+		if(!$this->silent){
+			echo( $jsonFileContents);  
+		}
+		else{
+			return $jsonFileContents;
+		}
 	}
 
 	/**
@@ -30,7 +41,8 @@ class JSONFile{
 		if(!file_put_contents($file, json_encode($content))){
 			$error= "Error writing $file";
 		}
-		echo(json_encode( array('error'=>$error)));   
+		if(!$this->silent)
+			echo(json_encode( array('error'=>$error)));   
 	}
 
 	/**
@@ -50,8 +62,9 @@ class JSONFile{
 		}
 		else{
 			$error= "No array found in $file";
-		}							
-		echo(json_encode( array('error'=>$error)));   
+		}	
+		if(!$this->silent)						
+			echo(json_encode( array('error'=>$error)));   
 	}
 
 	/**
@@ -63,7 +76,8 @@ class JSONFile{
 		if (!unlink($file)) {
 			$error= "Error deleting $file";
 		} 
-		echo(json_encode( array('error'=>$error)));   
+		if(!$this->silent)
+			echo(json_encode( array('error'=>$error)));   
 	}
 }
 

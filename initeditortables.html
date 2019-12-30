@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<script src="editor/js/ajax.js"></script>
+		<script src="editor/js/functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="editor/css/style.css" />
+	</head>
+
+	<script>
+		// setup ajax
+		var dtoRoute = new Ajax('http://localhost:1234/basicfunctions.php ', showJSON);
+
+		// return function
+		function showJSON(result) {
+			alert(result);
+			console.log(result);
+		}
+
+		// Database
+		function dbCreate(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.put();
+		}
+		// table *************************************************************
+		function tableCreateElements(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			var entries = [];
+			entries.push({
+				label: 'name',
+				type: 'VARCHAR(99)',
+				initValue: 'NOT NULL'
+			});
+			entries.push({
+				label: 'action',
+				type: 'VARCHAR(99)',
+				initValue: 'NOT NULL'
+			});
+			entries.push({
+				label: 'template',
+				type: 'INT(8)',
+				initValue: 'NOT NULL'
+			});
+			entries.push({
+				label: 'description',
+				type: 'VARCHAR(255)',
+				initValue: ''
+			});
+			var json = JSON.stringify(entries);
+			dtoRoute.put(json);
+		}
+		function tableDelete(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			dtoRoute.delete();
+		}
+	</script>
+
+	<body>
+		<h2>Initialize the database and the tables</h2>
+
+		<p>
+			Build database editor<br />
+			Build table emelents<br />
+			Build table templates
+		</p>
+		<!-- CREATE databse **************************************************** -->
+		<br /><br />
+		<button onclick="dbCreate('database/editor')" type="button">
+			Create Database "editor"
+		</button>
+
+		<!-- CREATE tables **************************************************** -->
+		<br /><br />
+		<p>Structures are in <b>tablestructures/&lt;tablename&gt;.tablestructure.json</b></p>
+		<button onclick="tableCreateElements('table/editor/elements')" type="button">
+			Create Table elements
+		</button>
+		<button onclick="tableCreateTemplates('table/editor/templates')" type="button">
+			Create Table template
+		</button>
+		<!-- DELETE tables **************************************************** -->
+		<br /><br />
+
+		<button onclick="tableDelete('table/editor/elements')" type="button">
+			Delete Table elements
+		</button>
+	</body>
+</html>
