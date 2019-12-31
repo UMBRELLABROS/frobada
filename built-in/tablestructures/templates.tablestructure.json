@@ -1,0 +1,6 @@
+[
+	{ "label": "name", "type": "VARCHAR(99)", "initValue": "NOT NULL" },
+	{ "label": "structure", "type": "VARCHAR(99)", "initValue": "NOT NULL" },
+	{ "label": "styles", "type": "VARCHAR(99)", "initValue": "NOT NULL" },
+	{ "label": "description", "type": "VARCHAR(255)", "initValue": "" }
+]

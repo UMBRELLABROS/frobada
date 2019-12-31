@@ -49,6 +49,32 @@
 			var json = JSON.stringify(entries);
 			dtoRoute.put(json);
 		}
+		function tableCreateTemplates(path) {
+			dtoRoute.URL = 'http://localhost:1234/' + path;
+			var entries = [];
+			entries.push({
+				label: 'name',
+				type: 'VARCHAR(99)',
+				initValue: 'NOT NULL'
+			});
+			entries.push({
+				label: 'structure',
+				type: 'VARCHAR(99)',
+				initValue: 'NOT NULL'
+			});
+			entries.push({
+				label: 'styles',
+				type: 'VARCHAR(99)',
+				initValue: 'NOT NULL'
+			});
+			entries.push({
+				label: 'description',
+				type: 'VARCHAR(255)',
+				initValue: ''
+			});
+			var json = JSON.stringify(entries);
+			dtoRoute.put(json);
+		}
 		function tableDelete(path) {
 			dtoRoute.URL = 'http://localhost:1234/' + path;
 			dtoRoute.delete();
@@ -76,13 +102,16 @@
 			Create Table elements
 		</button>
 		<button onclick="tableCreateTemplates('table/editor/templates')" type="button">
-			Create Table template
+			Create Table templates
 		</button>
 		<!-- DELETE tables **************************************************** -->
 		<br /><br />
 
 		<button onclick="tableDelete('table/editor/elements')" type="button">
 			Delete Table elements
+		</button>
+		<button onclick="tableDelete('table/editor/templates')" type="button">
+			Delete Table templates
 		</button>
 	</body>
 </html>
