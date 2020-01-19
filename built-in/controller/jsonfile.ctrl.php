@@ -11,6 +11,12 @@ $ctrl = new Request();
 
 // get server class for database
 include ("services/jsonfile.service.php");
+
+// manage subfolders
+if(isset($matches['folder']) && isset($matches['filename'])){
+	$matches['repository'] .= "/".$matches['folder'];
+}
+
 $jsonfile = new JSONFile($matches['repository']);
 
 // if method ="PUT"

@@ -7,7 +7,8 @@ class TableData{
     private $databaseName;    
     private $table;    
     private $conn;
-    private $params;
+	private $params;
+	private $silent = false; // silent mode
 
     public function __construct($databaseName, $table)
     {        
@@ -18,7 +19,12 @@ class TableData{
         // check existance
         $paramsJsonFileContents = file_get_contents("tablestructures/".$table.".tablestructure.json");
         $this->params = json_decode($paramsJsonFileContents, true);   
-    }
+	}
+	
+	/** change the silent mode */
+	public function setSilent($mode){
+		$this->silent = $mode;
+	}
 
     /**
      * insert a new line to a table 
@@ -49,8 +55,13 @@ class TableData{
         }
         catch(PDOException $e){
             $ret = array('message' => $message, "error"=>$e->getMessage(), "id"=>null);          
-        }    
-        echo(json_encode($ret)   );         
+		} 
+		if(!$this->silent){
+			echo(json_encode($ret)   );
+			}
+		else{
+			return $ret;         
+		}   
         $this->conn = null;
     }
 
@@ -72,8 +83,13 @@ class TableData{
         }
         catch(PDOException $e){            
             $ret = array('message' => $message, "error"=>$e->getMessage());           
-        }   
-        echo(json_encode($ret)   );         
+		}  
+		if(!$this->silent){ 
+			echo(json_encode($ret) );         
+		}
+		else{
+			return $ret;
+		}
         $this->conn = null;
 	}
 	
@@ -112,8 +128,13 @@ class TableData{
         }
         catch(PDOException $e){            
             $ret = array('message' => $message, "error"=>$e->getMessage());           
-        }   
-        echo(json_encode($ret)   );         
+		}   
+		if(!$this->silent){ 
+			echo(json_encode($ret) );  
+		}
+		else{
+			return $ret;
+		}
         $this->conn = null;
 	}
 
@@ -147,8 +168,13 @@ class TableData{
         }
         catch(PDOException $e){            
             $ret = array('message' => $message, "error"=>$e->getMessage());           
-        }   
-        echo(json_encode($ret)   );         
+		}   
+		if(!$this->silent){ 
+			echo(json_encode($ret) );         
+		}
+		else{
+			return $ret;
+		}
         $this->conn = null;
 	}
 

@@ -1,5 +1,5 @@
 var dto = new Ajax();
-var links = new Links();
+//var links = new Links();
 var layout = new Layout();
 var func = new Handler();
 var attr = new DataAttribute();
@@ -11,7 +11,11 @@ var inner = new Inner();
  * load structure and styles
  */
 function initEditor() {
-	const URL = 'http://localhost:1234/jsonfile/repository/editormaster';
+	// const URL = 'http://localhost:1234/jsonfile/repository/editormaster';
+	// dto.URL = URL;
+	// dto.returnFunction(callbackId);
+	// dto.get();
+	const URL = 'http://localhost:1234/elements/editor/elements/name/1_element';
 	dto.URL = URL;
 	dto.returnFunction(callbackId);
 	dto.get();
@@ -20,7 +24,7 @@ function initEditor() {
 /** load the ids  */
 function callbackId(result) {
 	console.log(result);
-	links.loadIds(result);
+	//links.loadIds(result);
 	inner.loadHTML(result);
 	func.loadFunctions(result);
 	attr.loadAttributes(result);

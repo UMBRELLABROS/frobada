@@ -1,0 +1,6 @@
+[
+	{
+		"path_pattern": "/^elements\\/(?P<database>[a-z_]+)\\/(?P<table>[a-z_]+)\\/(?P<where>[a-z_]+)\\/(?P<what>[a-z_0-9]+)$/",
+		"controller": "controller/elements.ctrl.php"
+	}
+]
