@@ -1,0 +1,35 @@
+[
+	{
+		"id": "fbd1",
+		"name": "fnm1",
+		"data": {
+			"destination": "fbd3"
+		},
+		"classes": ["abs"],
+		"events": [{ "click": "addContainer" }],
+		"innerHTML": "new container"
+	},
+	{
+		"id": "fbd2",
+		"name": "fnm2",
+		"events": [],
+		"innerHTML": ""
+	},
+	{ "id": "fbd3", "name": "fnm3", "events": [], "innerHTML": "" },
+	{
+		"id": "fbd4",
+		"name": "fnm4",
+		"data": {
+			"source": "fbd3"
+		},
+		"events": [{ "click": "saveDOM" }],
+		"innerHTML": "save"
+	},
+	{
+		"id": "fbd5",
+		"name": "fnm5",
+		"data": {},
+		"events": [],
+		"innerHTML": ""
+	}
+]

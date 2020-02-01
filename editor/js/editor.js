@@ -24,6 +24,7 @@ function initEditor() {
 /** load the ids  */
 function callbackId(result) {
 	console.log(result);
+	debugger;
 	//links.loadIds(result);
 	inner.loadHTML(result);
 	func.loadFunctions(result);
