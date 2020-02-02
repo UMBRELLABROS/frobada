@@ -5,8 +5,7 @@
 var Inner = function() {
 	this.loadHTML = loadHTML;
 
-	function loadHTML(json) {
-		var data = JSON.parse(json);
+	function loadHTML(data) {
 		writeHTML(data);
 	}
 

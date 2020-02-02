@@ -8,22 +8,25 @@ var Layout = function() {
 	this.loadStructure = loadStructure;
 	this.loadStyles = loadStyles;
 
-	function loadStructure(id, json) {
-		var data = JSON.parse(json);
-		writeElements($(id), data);
+	function loadStructure(id, actionData, structureData) {
+		writeElements($(id), actionData, structureData);
 	}
 
-	function loadStyles(json) {
-		var data = JSON.parse(json);
-		writeStyles(data);
+	function loadStyles(actionData, stylesData) {
+		writeStyles(actionData, stylesData);
 	}
 
 	/** load the array of HTML elements */
-	function writeElements(obj, elements) {
-		elements.map(element => {
-			writeElement(obj, element);
-			// handle childNodes
-			writeElements($(element.id), element.childNodes);
+	function writeElements(obj, actionData, structureData) {
+		structureData.map(element => {
+			// get the id from the actionData
+			var action = filter(actionData, 'name', element.name);
+			if (action) {
+				element.id = action.id;
+				writeElement(obj, element);
+				// handle childNodes
+				writeElements($(element.id), actionData, element.childNodes);
+			}
 		});
 	}
 
@@ -35,9 +38,13 @@ var Layout = function() {
 	}
 
 	/** load the array of styles */
-	function writeStyles(elements) {
-		elements.map(element => {
-			writeStyle($(element.id), element.attributes);
+	function writeStyles(actionData, stylesData) {
+		stylesData.map(element => {
+			var action = filter(actionData, 'name', element.name);
+			if (action) {
+				element.id = action.id;
+				writeStyle($(element.id), element.attributes);
+			}
 		});
 	}
 
@@ -52,5 +59,15 @@ var Layout = function() {
 				element[key] = value;
 			}
 		}
+	}
+
+	/** find the object by attribute */
+	function filter(data, attribute, match) {
+		for (var i = 0; i < data.length; i++) {
+			if (data[i][attribute] == match) {
+				return data[i];
+			}
+		}
+		return null;
 	}
 };

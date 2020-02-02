@@ -31,6 +31,3 @@ switch($ctrl->getMethod()){
 }
 
 ?>
-
-
-?>

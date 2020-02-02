@@ -5,8 +5,7 @@ var Handler = function() {
 	var funcs = new HandlerFunction();
 	this.loadFunctions = loadFunctions;
 
-	function loadFunctions(json) {
-		var data = JSON.parse(json);
+	function loadFunctions(data) {
 		writeFunctions(data);
 	}
 

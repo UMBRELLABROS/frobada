@@ -5,8 +5,7 @@
 var DataAttribute = function() {
 	this.loadAttributes = loadAttributes;
 
-	function loadAttributes(json) {
-		var data = JSON.parse(json);
+	function loadAttributes(data) {
 		writeAttributes(data);
 	}
 
