@@ -17,7 +17,7 @@ function SingleBinding(obj) {
 	_this = this;
 	this.element = obj.element;
 	this.value = obj.object[obj.property];
-	this.attribute = obj.attribute | 'innerHTML';
+	this.attribute = obj.attribute;
 
 	this.valueGetter = function() {
 		return _this.value;
@@ -39,7 +39,7 @@ function SingleBinding(obj) {
 /**
  * Binds an object to en alement (element.attribute)
  * and vice versa
- * @param {*} b
+ * @param {*} obj
  *
  * new TwoWayBinding({
  * object: obj,
@@ -49,25 +49,25 @@ function SingleBinding(obj) {
  * .addBinding(myInputElement2, "value", "keyup")
  * .addBinding(myDOMElement, "innerHTML")
  */
-function TwoWayBinding(b) {
+function TwoWayBinding(obj) {
 	_this = this;
 	this.elementBindings = [];
-	this.value = b.object[b.property];
+	this.value = obj.object[obj.property];
 
 	this.valueGetter = function() {
 		return _this.value;
 	};
-	this.valueSetter = function(val) {
-		_this.value = val;
+	this.valueSetter = function(value) {
+		_this.value = value;
 		for (var i = 0; i < _this.elementBindings.length; i++) {
 			var binding = _this.elementBindings[i];
-			binding.element[binding.attribute] = val;
+			binding.element[binding.attribute] = value;
 		}
 	};
 	this.addBinding = function(element, attribute, event) {
 		var binding = {
 			element: element,
-			attribute: attribute | 'innerHTML'
+			attribute: attribute
 		};
 		if (event) {
 			element.addEventListener(event, function(event) {
@@ -80,10 +80,10 @@ function TwoWayBinding(b) {
 		return _this;
 	};
 
-	Object.defineProperty(b.object, b.property, {
+	Object.defineProperty(obj.object, obj.property, {
 		get: this.valueGetter,
 		set: this.valueSetter
 	});
 
-	b.object[b.property] = this.value;
+	obj.object[obj.property] = this.value;
 }

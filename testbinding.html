@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<script src="editor/js/binding.js"></script>
+		<script src="editor/js/functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="editor/css/style.css" />
+	</head>
+	<body>
+		<div id="fbdEditor"></div>
+		<input type="text" id="in1" />
+		<input type="text" id="in2" />
+		<div id="out"></div>
+
+		<script>
+			var obj = { a: 123 };
+			var myInputElement1 = $('in1');
+			var myInputElement2 = $('in2');
+			var myDOMElement = $('out');
+
+			new TwoWayBinding({
+				object: obj,
+				property: 'a'
+			})
+				.addBinding(myInputElement1, 'value', 'keyup')
+				.addBinding(myInputElement2, 'value', 'keyup')
+				.addBinding(myDOMElement, 'innerHTML');
+			obj.a = 345;
+		</script>
+	</body>
+</html>
