@@ -13,9 +13,14 @@
 		<div id="out"></div>
 		<br /><br />
 		<button onclick="clearBinding()">Clear binding</button>
+		<button onclick="addNewBinding()">Add new binding</button>
+	</br>
+		<button onclick="deleteBinding()">Delete binding</button>
+		<button onclick="createNewBinding()">Create new binding</button>
 
 		<script>
 			var obj = { a: 123 };
+			var obj2 = { c: 1000 };
 			var myInputElement1 = $('in1');
 			var myInputElement2 = $('in2');
 			var myDOMElement = $('out');
@@ -30,8 +35,26 @@
 			obj.a = 345;
 
 			function clearBinding() {
-				db1.clearBinding();
 				obj.a = 42;
+				db1.clearBinding();				
+				obj.a = 51;
+			}
+
+			function addNewBinding() {
+				db1.addBinding(myInputElement1, 'value', 'keyup').addBinding(myDOMElement, 'innerHTML');
+			}
+
+			function deleteBinding(){
+				db1.clearBinding();		
+				db1=null;
+			}
+			function createNewBinding(){
+				var db2 = new TwoWayBinding({
+				object: obj2,
+				property: 'c'
+			})				
+				.addBinding(myInputElement2, 'value', 'keyup')
+				.addBinding(myDOMElement, 'innerHTML');
 			}
 		</script>
 	</body>

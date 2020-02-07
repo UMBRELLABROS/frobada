@@ -67,6 +67,7 @@ function TwoWayBinding(obj) {
 		}
 	};
 
+	/** add binding to the object */
 	this.addBinding = function(element, attribute, event) {
 		var binding = {
 			element: element,
@@ -86,57 +87,19 @@ function TwoWayBinding(obj) {
 		return _this;
 	};
 
-	//console.log('_THIS: ' + Object.keys(_this));
-
+	/** remove all bindings */
 	this.clearBinding = function() {
-		console.log('Num bindings: ' + _this.elementBindings.length);
-		var i = 0;
 		while (_this.elementBindings.length > 0) {
 			try {
-				console.log('Count: ' + i);
 				var binding = this.elementBindings.pop();
-
-				console.log('Num bindings: ' + _this.elementBindings.length);
-
-				console.log('Element:' + binding.element);
 			} catch (error) {
 				console.log(error);
+				break;
 			}
 			if (binding.event) {
-				console.log(binding.handler);
+				binding.element.removeEventListener(binding.event, binding.handler);
 			}
-
-			// var nodes = [],
-			// 	values = [];
-			// for (var att, i = 0, atts = binding.element.attributes, n = atts.length; i < n; i++) {
-			// 	att = atts[i];
-			// 	nodes.push(att.nodeName);
-			// 	values.push(att.nodeValue);
-			// }
-			// console.log('Nodes: ' + nodes);
-			// console.log('Nodes: ' + values);
-
-			i++;
 		}
-
-		// var nodes = [],
-		// 	values = [];
-		// for (var att, i = 0, atts = binding.element.attributes, n = atts.length; i < n; i++) {
-		// 	att = atts[i];
-		// 	nodes.push(att.nodeName);
-		// 	values.push(att.nodeValue);
-		// }
-		// console.log('Nodes: ' + nodes);
-		// console.log('Nodes: ' + values);
-
-		// if (binding.event) {
-		// 	// get the eventListener
-
-		// 	console.log(binding.event);
-		// 	console.log(binding.element[binding.attribute]);
-
-		// 	binding.element.removeEventListener(binding.event, binding.element[binding.attribute]);
-		// }
 	};
 
 	Object.defineProperty(obj.object, obj.property, {
