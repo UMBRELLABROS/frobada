@@ -57,6 +57,7 @@ function TwoWayBinding(obj) {
 	this.valueGetter = function() {
 		return _this.value;
 	};
+
 	this.valueSetter = function(value) {
 		_this.value = value;
 		for (var i = 0; i < _this.elementBindings.length; i++) {
@@ -64,6 +65,7 @@ function TwoWayBinding(obj) {
 			binding.element[binding.attribute] = value;
 		}
 	};
+
 	this.addBinding = function(element, attribute, event) {
 		var binding = {
 			element: element,
@@ -78,6 +80,17 @@ function TwoWayBinding(obj) {
 		this.elementBindings.push(binding);
 		element[attribute] = _this.value;
 		return _this;
+	};
+
+	this.clearBinding = function() {
+		for (var i = 0; i < _this.elementBindings.length; i++) {
+			var binding = this.elementBindings.pop();
+			if (binding.event) {
+				binding.element.removeEventListener(binding.event, function(event) {
+					_this.valueSetter(binding.element[attribute]);
+				});
+			}
+		}
 	};
 
 	Object.defineProperty(obj.object, obj.property, {
