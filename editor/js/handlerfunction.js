@@ -11,18 +11,20 @@ var HandlerFunction = function() {
 		addElementToParent($(destination));
 	}
 
+	/** add new DOM element to parent */
 	function addElementToParent(destination) {
 		// New element
 		div = dCE('div');
-		div.id = 'cfdb5'; // get next ID
-		div.style.width = '100px';
+		div.id = 'cfbd5'; // get next ID
+		div.style.width = '90px';
 		div.style.height = '100px';
 		div.style.backgroundColor = '#d00';
-		div.addEventListener('click', showInfo);
+		div.addEventListener('click', showDOMAttributes);
 		destination.appendChild(div);
 	}
 
-	function showInfo(event) {
+	/** links the attributes to the editor object */
+	function showDOMAttributes(event) {
 		// string has only numbers
 		// ^ start [0-9] numbers + more of that kind $ end
 		var reg = new RegExp('^[0-9]+$');
@@ -34,6 +36,20 @@ var HandlerFunction = function() {
 			// new styles without the number-list
 			if (styles[style] && !reg.test(style)) {
 				console.log(style + ' : ' + styles[style]); // key : value
+				switch (style) {
+					case 'width':
+						domAttributes.width = div.style.width;
+						twbWidth = new TwoWayBinding({ object: domAttributes, property: 'width' })
+							.addBinding($('fbd106'), 'value', 'keyup')
+							.addBinding(div, 'style.width');
+						break;
+					case 'height':
+						domAttributes.height = div.style.height;
+						twbHeight = new TwoWayBinding({ object: domAttributes, property: 'height' })
+							.addBinding($('fbdStyleHeight'), 'value', 'keyup')
+							.addBinding(div, 'style.height');
+						break;
+				}
 			}
 		});
 		event.cancelBubble = true;

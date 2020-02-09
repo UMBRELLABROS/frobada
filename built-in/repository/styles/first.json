@@ -80,5 +80,57 @@
 			}
 		},
 		"classes": ["abs"]
+	},
+	{
+		"name": "fnm6",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "100px",
+				"top": "50px",
+				"width": "100px",
+				"height": "20px"
+			}
+		},
+		"classes": ["abs"]
+	},
+	{
+		"name": "fnm7",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "210px",
+				"top": "50px",
+				"width": "100px",
+				"height": "20px"
+			}
+		},
+		"classes": ["abs"]
+	},
+	{
+		"name": "fnmStyleHeight",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "300px",
+				"top": "50px",
+				"width": "100px",
+				"height": "20px"
+			}
+		},
+		"classes": ["abs"]
+	},
+	{
+		"name": "fnmStyleHeightLabel",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "410px",
+				"top": "50px",
+				"width": "100px",
+				"height": "20px"
+			}
+		},
+		"classes": ["abs"]
 	}
 ]

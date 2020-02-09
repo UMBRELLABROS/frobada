@@ -13,8 +13,8 @@
  * })
  * var obj={a:123}
  */
-function SingleBinding(obj) {
-	_this = this;
+var SingleBinding = function(obj) {
+	var _this = this;
 	this.element = obj.element;
 	this.value = obj.object[obj.property];
 	this.attribute = obj.attribute;
@@ -34,7 +34,7 @@ function SingleBinding(obj) {
 	obj.object[obj.property] = this.value;
 
 	this.element[this.attribute] = this.value;
-}
+};
 
 /**
  * Binds an object to en alement (element.attribute)
@@ -49,8 +49,8 @@ function SingleBinding(obj) {
  * .addBinding(myInputElement2, "value", "keyup")
  * .addBinding(myDOMElement, "innerHTML")
  */
-function TwoWayBinding(obj) {
-	_this = this;
+var TwoWayBinding = function(obj) {
+	var _this = this;
 	this.elementBindings = [];
 	this.value = obj.object[obj.property];
 
@@ -63,7 +63,13 @@ function TwoWayBinding(obj) {
 		for (var i = 0; i < _this.elementBindings.length; i++) {
 			// inform all bindings
 			var binding = _this.elementBindings[i];
-			binding.element[binding.attribute] = value;
+			var attributes = binding.attribute.split('.');
+			if (attributes.length == 2) {
+				binding.element[attributes[0]][attributes[1]] = value;
+			} else {
+				binding.element[attributes[0]] = value;
+			}
+			//binding.element[binding.attribute] = value;
 		}
 	};
 
@@ -75,7 +81,7 @@ function TwoWayBinding(obj) {
 			// event: event;
 		};
 		if (event) {
-			// recursively
+			// create a function and store it
 			binding.handler = function(event) {
 				_this.valueSetter(element[attribute]);
 			};
@@ -108,4 +114,4 @@ function TwoWayBinding(obj) {
 	});
 
 	obj.object[obj.property] = this.value;
-}
+};

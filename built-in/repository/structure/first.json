@@ -23,5 +23,25 @@
 			{ "nodeName": "DIV", "name": "fnm8", "childNodes": [] },
 			{ "nodeName": "DIV", "name": "fnm9", "childNodes": [] }
 		]
+	},
+	{
+		"nodeName": "INPUT",
+		"name": "fnm6",
+		"childNodes": []
+	},
+	{
+		"nodeName": "DIV",
+		"name": "fnm7",
+		"childNodes": []
+	},
+	{
+		"nodeName": "INPUT",
+		"name": "fnmStyleHeight",
+		"childNodes": []
+	},
+	{
+		"nodeName": "DIV",
+		"name": "fnmStyleHeightLabel",
+		"childNodes": []
 	}
 ]
