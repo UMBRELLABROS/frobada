@@ -3,6 +3,11 @@ var HandlerFunction = function() {
 	this.Functions = [];
 	this.Functions['addContainer'] = addContainer;
 	this.Functions['saveDOM'] = saveDOM;
+	// internal static variables
+	var counter = 0;
+	var bindings = [];
+	// [Object] binding DOM to the attributes
+	var domAttributes = { width: null, height: null }; // [Object] binding DOM to the attributes
 
 	/** add a div element */
 	function addContainer(event) {
@@ -15,7 +20,7 @@ var HandlerFunction = function() {
 	function addElementToParent(destination) {
 		// New element
 		div = dCE('div');
-		div.id = 'cfbd5'; // get next ID
+		div.id = 'cfbd' + (counter++).toString(); // get next ID
 		div.style.width = '90px';
 		div.style.height = '100px';
 		div.style.backgroundColor = '#d00';
@@ -32,27 +37,48 @@ var HandlerFunction = function() {
 
 		console.log('ID: ' + div.id);
 		var styles = div.style; // read the inline styles
+
+		// release old bindings
+		bindings.forEach(binding => {
+			binding.clearBinding();
+			binding = null;
+		});
+		bindings = [];
+
+		// Read from file
+		var bindingData = [
+			{ attribute: 'width', id: 'fbd106' },
+			{ attribute: 'height', id: 'fbdStyleHeight' }
+		];
+
+		// Loop for the styles
 		Object.keys(styles).forEach(style => {
 			// new styles without the number-list
 			if (styles[style] && !reg.test(style)) {
 				console.log(style + ' : ' + styles[style]); // key : value
-				switch (style) {
-					case 'width':
-						domAttributes.width = div.style.width;
-						twbWidth = new TwoWayBinding({ object: domAttributes, property: 'width' })
-							.addBinding($('fbd106'), 'value', 'keyup')
-							.addBinding(div, 'style.width');
-						break;
-					case 'height':
-						domAttributes.height = div.style.height;
-						twbHeight = new TwoWayBinding({ object: domAttributes, property: 'height' })
-							.addBinding($('fbdStyleHeight'), 'value', 'keyup')
-							.addBinding(div, 'style.height');
-						break;
+				var bindData = filter(bindingData, 'attribute', style);
+				// only known attributes
+				if (bindData) {
+					domAttributes[bindData.attribute] = div.style[bindData.attribute];
+					bindings.push(
+						new TwoWayBinding({ object: domAttributes, property: bindData.attribute })
+							.addBinding($(bindData.id), 'value', 'keyup')
+							.addBinding(div, 'style.' + bindData.attribute)
+					);
 				}
 			}
 		});
 		event.cancelBubble = true;
+	}
+
+	/** find the object by attribute in an array */
+	function filter(data, attribute, match) {
+		for (var i = 0; i < data.length; i++) {
+			if (data[i][attribute] == match) {
+				return data[i];
+			}
+		}
+		return null;
 	}
 
 	function saveDOM(event) {}

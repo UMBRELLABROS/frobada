@@ -5,10 +5,6 @@ var func = new Handler();
 var attr = new DataAttribute();
 var inner = new Inner();
 
-// internal variables
-var domAttributes = { width: null, height: null }; // [Object] binding DOM to the attributes
-var twbWidth;
-var twbHeight;
 /**
  * Initialize the editor
  *
