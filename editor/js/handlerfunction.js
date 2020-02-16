@@ -47,8 +47,18 @@ var HandlerFunction = function() {
 
 		// Read from file
 		var bindingData = [
-			{ attribute: 'width', id: 'fbd106' },
-			{ attribute: 'height', id: 'fbdStyleHeight' }
+			{
+				attribute: 'width',
+				ids: [$('fbdStyleWidth'), $('fbdStyleWidthUnit')],
+				events: ['keyup', 'keyup'],
+				regex: '/([0-9]+)(px|pt|em|%|vh|vw)/g'
+			},
+			{
+				attribute: 'height',
+				ids: [$('fbdStyleHeight'), $('fbdStyleHeightUnit')],
+				events: ['keyup', 'keyup'],
+				regex: '/([0-9]+)(px|pt|em|%|vh|vw)/g'
+			}
 		];
 
 		// Loop for the styles
@@ -62,8 +72,8 @@ var HandlerFunction = function() {
 					domAttributes[bindData.attribute] = div.style[bindData.attribute];
 					bindings.push(
 						new TwoWayBinding({ object: domAttributes, property: bindData.attribute })
-							.addBinding($(bindData.id), 'value', 'keyup')
-							.addBinding(div, 'style.' + bindData.attribute)
+							.addBinding(bindData.ids, 'value', bindData.events, bindData.regex)
+							.addBinding([div], 'style.' + bindData.attribute)
 					);
 				}
 			}

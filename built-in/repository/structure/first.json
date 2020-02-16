@@ -26,7 +26,12 @@
 	},
 	{
 		"nodeName": "INPUT",
-		"name": "fnm6",
+		"name": "fnmStyleWidth",
+		"childNodes": []
+	},
+	{
+		"nodeName": "INPUT",
+		"name": "fnmStyleWidthUnit",
 		"childNodes": []
 	},
 	{
@@ -37,6 +42,11 @@
 	{
 		"nodeName": "INPUT",
 		"name": "fnmStyleHeight",
+		"childNodes": []
+	},
+	{
+		"nodeName": "INPUT",
+		"name": "fnmStyleHeightUnit",
 		"childNodes": []
 	},
 	{

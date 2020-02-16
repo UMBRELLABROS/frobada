@@ -59,37 +59,59 @@ var TwoWayBinding = function(obj) {
 	};
 
 	this.valueSetter = function(value) {
+		console.log('VALUE:' + value);
 		_this.value = value;
+		console.log('After:' + _this.value);
+		console.log('Length Bindings:' + _this.elementBindings.length);
 		for (var i = 0; i < _this.elementBindings.length; i++) {
 			// inform all bindings
 			var binding = _this.elementBindings[i];
 			var attributes = binding.attribute.split('.');
-			if (attributes.length == 2) {
-				binding.element[attributes[0]][attributes[1]] = value;
-			} else {
-				binding.element[attributes[0]] = value;
+
+			for (var i = 0; i < binding.elements.length; i++) {
+				if (attributes.length == 2) {
+					binding.elements[i][attributes[0]][attributes[1]] = value;
+				} else {
+					binding.elements[i][attributes[0]] = value;
+				}
 			}
-			//binding.element[binding.attribute] = value;
+
+			if (binding.special) {
+				//alert(binding.special);
+			}
 		}
 	};
 
-	/** add binding to the object */
-	this.addBinding = function(element, attribute, event) {
+	/** add binding to the object[s] */
+	this.addBinding = function(elements, attribute, events, special) {
 		var binding = {
-			element: element,
+			elements: elements,
 			attribute: attribute
-			// event: event;
+			// handler: [],
+			// events: events,
+			// special: special
 		};
-		if (event) {
-			// create a function and store it
-			binding.handler = function(event) {
-				_this.valueSetter(element[attribute]);
-			};
-			element.addEventListener(event, binding.handler);
-			binding.event = event;
+		console.log('Elements:');
+		console.log(elements);
+		if (events) {
+			binding.handler = [];
+			binding.events = events;
+			binding.special = special;
+			// loop over all events
+			for (var i = 0; i < events.length; i++) {
+				var event = events[i];
+				var element = elements[i];
+				// create a function and store it
+				binding.handler[i] = function(event) {
+					_this.valueSetter(element[attribute]);
+				};
+				elements[i].addEventListener(event, binding.handler[i]);
+			}
 		}
 		this.elementBindings.push(binding);
-		element[attribute] = _this.value;
+		for (var i = 0; i < elements.length; i++) {
+			elements[i][attribute] = _this.value;
+		}
 		return _this;
 	};
 

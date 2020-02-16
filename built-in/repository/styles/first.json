@@ -82,7 +82,7 @@
 		"classes": ["abs"]
 	},
 	{
-		"name": "fnm6",
+		"name": "fnmStyleWidth",
 		"attributes": {
 			"style": {
 				"position": "absolute",
@@ -95,11 +95,24 @@
 		"classes": ["abs"]
 	},
 	{
+		"name": "fnmStyleWidthUnit",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "200px",
+				"top": "50px",
+				"width": "20px",
+				"height": "20px"
+			}
+		},
+		"classes": ["abs"]
+	},
+	{
 		"name": "fnm7",
 		"attributes": {
 			"style": {
 				"position": "absolute",
-				"left": "210px",
+				"left": "230px",
 				"top": "50px",
 				"width": "100px",
 				"height": "20px"
@@ -121,11 +134,24 @@
 		"classes": ["abs"]
 	},
 	{
+		"name": "fnmStyleHeightUnit",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "400px",
+				"top": "50px",
+				"width": "20px",
+				"height": "20px"
+			}
+		},
+		"classes": ["abs"]
+	},
+	{
 		"name": "fnmStyleHeightLabel",
 		"attributes": {
 			"style": {
 				"position": "absolute",
-				"left": "410px",
+				"left": "430px",
 				"top": "50px",
 				"width": "100px",
 				"height": "20px"
