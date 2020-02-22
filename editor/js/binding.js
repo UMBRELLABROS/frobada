@@ -41,7 +41,7 @@ var SingleBinding = function(obj) {
  * and vice versa
  * @param {*} obj
  *
- * new TwoWayBinding({
+ * new TwoWayExtendedBinding({
  * object: obj,
  * property: "a"
  * })
@@ -49,7 +49,7 @@ var SingleBinding = function(obj) {
  * .addBinding(myInputElement2, "value", "keyup")
  * .addBinding(myDOMElement, "innerHTML")
  */
-var TwoWayBinding = function(obj) {
+var TwoWayExtendedBinding = function(obj) {
 	var _this = this;
 	this.elementBindings = [];
 	this.value = obj.object[obj.property];

@@ -71,7 +71,7 @@ var HandlerFunction = function() {
 				if (bindData) {
 					domAttributes[bindData.attribute] = div.style[bindData.attribute];
 					bindings.push(
-						new TwoWayBinding({ object: domAttributes, property: bindData.attribute })
+						new TwoWayExtendedBinding({ object: domAttributes, property: bindData.attribute })
 							.addBinding(bindData.ids, 'value', bindData.events, bindData.regex)
 							.addBinding([div], 'style.' + bindData.attribute)
 					);
