@@ -41,6 +41,87 @@ var SingleBinding = function(obj) {
  * and vice versa
  * @param {*} obj
  *
+ * new TwoWayBinding({
+ * object: obj,
+ * property: "a"
+ * })
+ * .addBinding(myInputElement1, "value", "keyup")
+ * .addBinding(myInputElement2, "value", "keyup")
+ * .addBinding(myDOMElement, "innerHTML")
+ */
+var TwoWayBinding = function(obj) {
+	var _this = this;
+	this.elementBindings = [];
+	this.value = obj.object[obj.property];
+
+	this.valueGetter = function() {
+		return _this.value;
+	};
+
+	this.valueSetter = function(value) {
+		_this.value = value;
+		for (var i = 0; i < _this.elementBindings.length; i++) {
+			// inform all bindings
+			var binding = _this.elementBindings[i];
+			var attributes = binding.attribute.split('.');
+			if (attributes.length == 2) {
+				binding.element[attributes[0]][attributes[1]] = value;
+			} else {
+				binding.element[attributes[0]] = value;
+			}
+			//binding.element[binding.attribute] = value;
+		}
+	};
+
+	/** add binding to the object */
+	this.addBinding = function(element, attribute, event) {
+		var binding = {
+			element: element,
+			attribute: attribute
+			// event: event;
+		};
+		if (event) {
+			// create a function and store it
+			binding.handler = function(event) {
+				_this.valueSetter(element[attribute]);
+			};
+
+			element.addEventListener(event, binding.handler);
+			binding.event = event;
+		}
+		this.elementBindings.push(binding);
+		element[attribute] = _this.value;
+		return _this;
+	};
+
+	/** remove all bindings */
+	this.clearBinding = function() {
+		while (_this.elementBindings.length > 0) {
+			try {
+				var binding = this.elementBindings.pop();
+			} catch (error) {
+				console.log(error);
+				break;
+			}
+			if (binding.event) {
+				binding.element.removeEventListener(binding.event, binding.handler);
+			}
+		}
+	};
+
+	Object.defineProperty(obj.object, obj.property, {
+		get: this.valueGetter,
+		set: this.valueSetter
+	});
+
+	obj.object[obj.property] = this.value;
+};
+
+/**
+ * Binds an object to en alement (element.attribute)
+ * and vice versa
+ * @param {*} obj
+ *
  * new TwoWayExtendedBinding({
  * object: obj,
  * property: "a"
@@ -68,11 +149,11 @@ var TwoWayExtendedBinding = function(obj) {
 			var binding = _this.elementBindings[i];
 			var attributes = binding.attribute.split('.');
 
-			for (var i = 0; i < binding.elements.length; i++) {
+			for (var j = 0; j < binding.elements.length; j++) {
 				if (attributes.length == 2) {
-					binding.elements[i][attributes[0]][attributes[1]] = value;
+					binding.elements[j][attributes[0]][attributes[1]] = value;
 				} else {
-					binding.elements[i][attributes[0]] = value;
+					binding.elements[j][attributes[0]] = value;
 				}
 			}
 
@@ -86,31 +167,36 @@ var TwoWayExtendedBinding = function(obj) {
 	this.addBinding = function(elements, attribute, events, special) {
 		var binding = {
 			elements: elements,
-			attribute: attribute
-			// handler: [],
-			// events: events,
-			// special: special
+			attribute: attribute,
+			handler: [],
+			events: null,
+			special: null
 		};
 		console.log('Elements:');
 		console.log(elements);
 		if (events) {
-			binding.handler = [];
 			binding.events = events;
 			binding.special = special;
 			// loop over all events
 			for (var i = 0; i < events.length; i++) {
 				var event = events[i];
-				var element = elements[i];
 				// create a function and store it
 				binding.handler[i] = function(event) {
-					_this.valueSetter(element[attribute]);
+					_this.valueSetter(event.target[attribute]);
 				};
+
 				elements[i].addEventListener(event, binding.handler[i]);
 			}
 		}
 		this.elementBindings.push(binding);
+		// set initial values here
 		for (var i = 0; i < elements.length; i++) {
-			elements[i][attribute] = _this.value;
+			if (binding.special) {
+				var arr = _this.value.match(binding.special);
+				elements[i][attribute] = arr[i + 1];
+			} else {
+				elements[i][attribute] = _this.value;
+			}
 		}
 		return _this;
 	};
