@@ -139,26 +139,29 @@ var TwoWayExtendedBinding = function(obj) {
 		return _this.value;
 	};
 
-	this.valueSetter = function(value) {
-		console.log('VALUE:' + value);
-		_this.value = value;
-		console.log('After:' + _this.value);
-		console.log('Length Bindings:' + _this.elementBindings.length);
+	this.valueSetter = function(value, binding) {
+		if (binding && binding.elements.length == 2) {
+			// link the element back together
+			_this.value = binding.elements[0].value + binding.elements[1].value;
+		} else {
+			_this.value = value;
+		}
+
 		for (var i = 0; i < _this.elementBindings.length; i++) {
 			// inform all bindings
 			var binding = _this.elementBindings[i];
 			var attributes = binding.attribute.split('.');
+			var actValue = _this.value;
 
 			for (var j = 0; j < binding.elements.length; j++) {
-				if (attributes.length == 2) {
-					binding.elements[j][attributes[0]][attributes[1]] = value;
-				} else {
-					binding.elements[j][attributes[0]] = value;
+				if (binding.special) {
+					actValue = binding.elements[j].value;
 				}
-			}
-
-			if (binding.special) {
-				//alert(binding.special);
+				if (attributes.length == 2) {
+					binding.elements[j][attributes[0]][attributes[1]] = actValue;
+				} else {
+					binding.elements[j][attributes[0]] = actValue;
+				}
 			}
 		}
 	};
@@ -182,7 +185,7 @@ var TwoWayExtendedBinding = function(obj) {
 				var event = events[i];
 				// create a function and store it
 				binding.handler[i] = function(event) {
-					_this.valueSetter(event.target[attribute]);
+					_this.valueSetter(event.target[attribute], binding);
 				};
 
 				elements[i].addEventListener(event, binding.handler[i]);
