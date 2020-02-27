@@ -47,6 +47,20 @@
 		"innerHTML": ""
 	},
 	{
+		"id": "fbdStyleWidthUnitOpt1",
+		"name": "fnmStyleWidthUnitOpt1",
+		"data": {},
+		"events": [],
+		"innerHTML": "px"
+	},
+	{
+		"id": "fbdStyleWidthUnitOpt2",
+		"name": "fnmStyleWidthUnitOpt2",
+		"data": {},
+		"events": [],
+		"innerHTML": "%"
+	},
+	{
 		"id": "fbd107",
 		"name": "fnm7",
 		"data": {},

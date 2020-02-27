@@ -30,9 +30,12 @@
 		"childNodes": []
 	},
 	{
-		"nodeName": "INPUT",
+		"nodeName": "SELECT",
 		"name": "fnmStyleWidthUnit",
-		"childNodes": []
+		"childNodes": [
+			{ "nodeName": "OPTION", "name": "fnmStyleWidthUnitOpt1", "childNodes": [] },
+			{ "nodeName": "OPTION", "name": "fnmStyleWidthUnitOpt2", "childNodes": [] }
+		]
 	},
 	{
 		"nodeName": "DIV",

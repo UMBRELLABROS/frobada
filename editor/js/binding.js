@@ -37,7 +37,7 @@ var SingleBinding = function(obj) {
 };
 
 /**
- * Binds an object to en alement (element.attribute)
+ * Binds an object to an alement (element.attribute)
  * and vice versa
  * @param {*} obj
  *

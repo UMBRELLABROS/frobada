@@ -45,19 +45,19 @@ var HandlerFunction = function() {
 		});
 		bindings = [];
 
-		// Read from file
+		// Read from file [todo]
 		var bindingData = [
 			{
 				attribute: 'width',
 				ids: [$('fbdStyleWidth'), $('fbdStyleWidthUnit')],
 				events: ['keyup', 'keyup'],
-				regex: /([0-9]*)(px|pt|em|%|vh|vw)/
+				regex: /([0-9]*)(px|pt|em|%|vw)/
 			},
 			{
 				attribute: 'height',
 				ids: [$('fbdStyleHeight'), $('fbdStyleHeightUnit')],
 				events: ['keyup', 'keyup'],
-				regex: /([0-9]*)(px|pt|em|%|vh|vw)/
+				regex: /([0-9]*)(px|pt|em|%|vh)/
 			}
 		];
 
