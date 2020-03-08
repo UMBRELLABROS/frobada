@@ -25,7 +25,7 @@ switch($ctrl->getMethod()){
     case "DELETE":       
     break;
     case "GET":
-		// read the data from the line
+		// read the data from the database / json files
 		$elements->read($matches['where'], $matches['what']);
     break;
 }

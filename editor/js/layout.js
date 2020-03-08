@@ -6,46 +6,43 @@
  */
 var Layout = function() {
 	this.loadStructure = loadStructure;
-	this.loadStyles = loadStyles;
+	var styles;
 
-	function loadStructure(id, actionData, structureData) {
+	function loadStructure(id, actionData, structureData, stylesData) {
+		styles = stylesData;
 		writeElements($(id), actionData, structureData);
-	}
-
-	function loadStyles(actionData, stylesData) {
-		writeStyles(actionData, stylesData);
 	}
 
 	/** load the array of HTML elements */
 	function writeElements(obj, actionData, structureData) {
+		if (!obj) return;
 		structureData.map(element => {
 			// get the id from the actionData
-			var action = filter(actionData, 'name', element.name);
-			if (action) {
-				element.id = action.id;
-				writeElement(obj, element);
+			var actions = filter(actionData, 'name', element.name);
+			if (actions.length == 0) {
+				// no id = no action
+				var item = writeElement(obj, element);
 				// handle childNodes
-				writeElements($(element.id), actionData, element.childNodes);
+				writeElements(item, actionData, element.childNodes);
 			}
+			actions.forEach(action => {
+				element.id = action.id;
+				var item = writeElement(obj, element);
+				// handle childNodes
+				writeElements(item, actionData, element.childNodes);
+			});
 		});
 	}
 
 	/** write one HTML element and attach to parent */
 	function writeElement(obj, element) {
 		var item = dCE(element.nodeName);
-		item.id = element.id;
+		if (element.id) item.id = element.id;
+		// search style by element.name
+		var itemStyles = filter(styles, 'name', element.name)[0];
+		if (itemStyles) writeStyle(item, itemStyles.attributes);
 		obj.appendChild(item);
-	}
-
-	/** load the array of styles */
-	function writeStyles(actionData, stylesData) {
-		stylesData.map(element => {
-			var action = filter(actionData, 'name', element.name);
-			if (action) {
-				element.id = action.id;
-				writeStyle($(element.id), element.attributes);
-			}
-		});
+		return item;
 	}
 
 	/** write the style */
@@ -61,13 +58,14 @@ var Layout = function() {
 		}
 	}
 
-	/** find the object by attribute */
+	/** find the objects by attribute */
 	function filter(data, attribute, match) {
+		result = [];
 		for (var i = 0; i < data.length; i++) {
 			if (data[i][attribute] == match) {
-				return data[i];
+				result.push(data[i]);
 			}
 		}
-		return null;
+		return result;
 	}
 };

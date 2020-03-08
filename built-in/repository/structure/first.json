@@ -48,13 +48,27 @@
 		"childNodes": []
 	},
 	{
-		"nodeName": "INPUT",
+		"nodeName": "SELECT",
 		"name": "fnmStyleHeightUnit",
-		"childNodes": []
+		"childNodes": [
+			{ "nodeName": "OPTION", "name": "fnmStyleHeightUnitOpt1", "childNodes": [] },
+			{ "nodeName": "OPTION", "name": "fnmStyleHeightUnitOpt2", "childNodes": [] }
+		]
 	},
 	{
 		"nodeName": "DIV",
 		"name": "fnmStyleHeightLabel",
 		"childNodes": []
+	},
+	{
+		"nodeName": "DIV",
+		"name": "fnmSubTemplateTest",
+		"childNodes": []
+	},
+	{
+		"template": {
+			"structure": "second",
+			"styles": "second"
+		}
 	}
 ]

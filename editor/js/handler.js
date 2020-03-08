@@ -18,6 +18,7 @@ var Handler = function() {
 
 	/** add a function to the element */
 	function writeFunction(element, events) {
+		if (!events) return;
 		for ([key, value] of Object.entries(events)) {
 			if (typeof value === 'object') {
 				writeFunction(element, value);

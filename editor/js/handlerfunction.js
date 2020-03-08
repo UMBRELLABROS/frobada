@@ -50,13 +50,13 @@ var HandlerFunction = function() {
 			{
 				attribute: 'width',
 				ids: [$('fbdStyleWidth'), $('fbdStyleWidthUnit')],
-				events: ['keyup', 'keyup'],
+				events: ['keyup', 'change'],
 				regex: /([0-9]*)(px|pt|em|%|vw)/
 			},
 			{
 				attribute: 'height',
 				ids: [$('fbdStyleHeight'), $('fbdStyleHeightUnit')],
-				events: ['keyup', 'keyup'],
+				events: ['keyup', 'change'],
 				regex: /([0-9]*)(px|pt|em|%|vh)/
 			}
 		];

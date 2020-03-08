@@ -8,9 +8,10 @@ require_once ("services/jsonfile.service.php");
 class Elements{
     private $databaseName;    
     private $table;    
-    private $conn;
-	private $params;
-	private $tabledata;	
+    // private $conn;
+	// private $params;
+	// private $tabledata;	
+	private $styles=[]; // array of all styles
 
     public function __construct($databaseName, $table)
     {        
@@ -39,13 +40,17 @@ class Elements{
 		//print_r($templateData);
 		$structureJSON = $this->readJSONFile("repository/structure",$templateData['structure']);
 		$stylesJSON = $this->readJSONFile("repository/styles",$templateData['styles']);
+		$this->styles = json_decode($stylesJSON,true);
 		// print_r($structureJSON);
 		// print_r($stylesJSON);
+		
+		// check for includes
+		$structureJSON = $this->checkForIncludes($structureJSON);
 
 		$ret =  array("action"=> json_decode($actionJSON), 
 		"template"=> array(
 			"structure"=>json_decode($structureJSON), 
-			"styles"=>json_decode($stylesJSON))) ;
+			"styles"=> $this->styles )) ;
 		// print_r(json_encode($ret));
 		echo json_encode($ret);
 	}
@@ -63,9 +68,33 @@ class Elements{
 		}
 		else{
 			echo("No file ".$repository." ".$filename);
-		}
-		
+		}		
 	}
+
+	/**
+	 * Check, if there are includes 
+	 */
+	private function checkForIncludes($structureJSON){
+		// convert to arrays
+		$elements= json_decode($structureJSON,true);		
+		for ($i=0; $i <count($elements); $i++) { 
+			$object=$elements[$i];					
+			if(isset($object['template'])){
+				$template= $object['template'];
+				// read structure and styles					
+				$styles= $this->readJSONFile("repository/styles",$template['styles']);	
+				array_push($this->styles,(json_decode($styles,true))[0]);
+				
+				$includeJSON = $this->readJSONFile("repository/structure",$template['structure']);								
+				// recursive
+				// code for recursive
+				// ###
+				$elements[$i] = json_decode($includeJSON);
+			}			
+		}
+		return json_encode($elements);
+	}
+	
 }
 
 ?>
