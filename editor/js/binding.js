@@ -141,8 +141,16 @@ var TwoWayExtendedBinding = function(obj) {
 
 	this.valueSetter = function(value, binding) {
 		if (binding && binding.elements.length == 2) {
-			// link the element back together
-			_this.value = binding.elements[0].value + binding.elements[1].value;
+			// link the element back together by join rule
+			_this.value = '';
+			for (var i = 0; i < binding.join.length; i++) {
+				if (isNumeric(binding.join[i])) {
+					_this.value += binding.elements[binding.join[i]].value;
+				} else {
+					_this.value += binding.join[i];
+				}
+			}
+			//_this.value = binding.elements[0].value + binding.elements[1].value;
 		} else {
 			_this.value = value;
 		}
@@ -154,7 +162,7 @@ var TwoWayExtendedBinding = function(obj) {
 			var actValue = _this.value;
 
 			for (var j = 0; j < binding.elements.length; j++) {
-				if (binding.special) {
+				if (binding.explode) {
 					actValue = binding.elements[j].value;
 				}
 				if (attributes.length == 2) {
@@ -167,19 +175,21 @@ var TwoWayExtendedBinding = function(obj) {
 	};
 
 	/** add binding to the object[s] */
-	this.addBinding = function(elements, attribute, events, special) {
+	this.addBinding = function(elements, attribute, events, explode, join) {
 		var binding = {
 			elements: elements,
 			attribute: attribute,
 			handler: [],
 			events: null,
-			special: null
+			explode: null,
+			join: null
 		};
 		console.log('Elements:');
 		console.log(elements);
 		if (events) {
 			binding.events = events;
-			binding.special = special;
+			binding.explode = explode;
+			binding.join = join;
 			// loop over all events
 			for (var i = 0; i < events.length; i++) {
 				var event = events[i];
@@ -194,8 +204,8 @@ var TwoWayExtendedBinding = function(obj) {
 		this.elementBindings.push(binding);
 		// set initial values here
 		for (var i = 0; i < elements.length; i++) {
-			if (binding.special) {
-				var arr = _this.value.match(binding.special);
+			if (binding.explode) {
+				var arr = _this.value.match(binding.explode);
 				elements[i][attribute] = arr[i + 1];
 			} else {
 				elements[i][attribute] = _this.value;
@@ -225,4 +235,8 @@ var TwoWayExtendedBinding = function(obj) {
 	});
 
 	obj.object[obj.property] = this.value;
+
+	var isNumeric = function(ch) {
+		return /^[0-9]$/i.test(ch);
+	};
 };

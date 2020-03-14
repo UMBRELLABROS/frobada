@@ -8,13 +8,13 @@
 				"top": "250px",
 				"width": "200px",
 				"height": "60px",
-				"background-color": "#008",
-				"border": "solid 1px #333",
+				"background-color": "#ddd",
+				"border": "solid 1px #900",
 				"border-radius": "2px",
 				"boxShadow": "4px 4px 4px #999",
 				"text-align": "center",
 				"cursor": "pointer",
-				"color": "#f0f"
+				"color": "#ddd"
 			}
 		}
 	}

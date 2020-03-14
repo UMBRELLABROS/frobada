@@ -51,13 +51,15 @@ var HandlerFunction = function() {
 				attribute: 'width',
 				ids: [$('fbdStyleWidth'), $('fbdStyleWidthUnit')],
 				events: ['keyup', 'change'],
-				regex: /([0-9]*)(px|pt|em|%|vw)/
+				regex: /([0-9]*)(px|pt|em|%|vw)/,
+				join: [0, 1]
 			},
 			{
 				attribute: 'height',
 				ids: [$('fbdStyleHeight'), $('fbdStyleHeightUnit')],
 				events: ['keyup', 'change'],
-				regex: /([0-9]*)(px|pt|em|%|vh)/
+				regex: /([0-9]*)(px|pt|em|%|vh)/,
+				join: [0, 1]
 			}
 		];
 
@@ -72,7 +74,7 @@ var HandlerFunction = function() {
 					domAttributes[bindData.attribute] = div.style[bindData.attribute];
 					bindings.push(
 						new TwoWayExtendedBinding({ object: domAttributes, property: bindData.attribute })
-							.addBinding(bindData.ids, 'value', bindData.events, bindData.regex)
+							.addBinding(bindData.ids, 'value', bindData.events, bindData.regex, bindData.join)
 							.addBinding([div], 'style.' + bindData.attribute)
 					);
 				}
