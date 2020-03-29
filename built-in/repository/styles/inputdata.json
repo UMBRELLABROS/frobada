@@ -1,0 +1,47 @@
+[
+	{
+		"name": "fnmBoxSelectText",
+		"attributes": {
+			"style": {
+				"position": "relative",
+				"width": "300px",
+				"height": "100px",
+				"background-color": "#dfd",
+				"z-index": "12",
+				"border": "solid 1px #333"
+			}
+		}
+	},
+	{
+		"name": "fnmInputBox",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "30px",
+				"width": "100px",
+				"background-color": "#666"
+			}
+		}
+	},
+	{
+		"name": "fnmSelect",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "130px",
+				"width": "50px",
+				"background-color": "#6ff"
+			}
+		}
+	},
+	{
+		"name": "fnmDescription",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "190px",
+				"color": "#600"
+			}
+		}
+	}
+]

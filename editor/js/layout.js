@@ -15,21 +15,18 @@ var Layout = function() {
 
 	/** load the array of HTML elements */
 	function writeElements(obj, actionData, structureData) {
-		if (!obj) return;
-		structureData.map(element => {
-			// get the id from the actionData
-			var actions = filter(actionData, 'name', element.name);
-			if (actions.length == 0) {
-				// no id = no action
-				var item = writeElement(obj, element);
+		if (!obj || !structureData) return;
+		actionData.map(action => {
+			// get name from the actionData
+			// events only, if id is available
+			var structures = filter(structureData, 'name', action.name);
+			structures.map(structure => {
+				if (action.id) {
+					structure.id = action.id;
+				}
+				var item = writeElement(obj, structure);
 				// handle childNodes
-				writeElements(item, actionData, element.childNodes);
-			}
-			actions.forEach(action => {
-				element.id = action.id;
-				var item = writeElement(obj, element);
-				// handle childNodes
-				writeElements(item, actionData, element.childNodes);
+				writeElements(item, actionData, structure.childNodes);
 			});
 		});
 	}

@@ -1,5 +1,7 @@
-{
-	"nodeName": "DIV",
-	"name": "fnmSecondTest42",
-	"childNodes": []
-}
+[
+	{
+		"nodeName": "DIV",
+		"name": "fnmSecondTest42",
+		"childNodes": []
+	}
+]

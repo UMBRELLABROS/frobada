@@ -1,12 +1,12 @@
 [
 	{
-		"name": "fnm1",
+		"name": "fnmAddNewContainer",
 		"attributes": {
 			"style": {
-				"position": "absolute",
-				"left": "100px",
+				"position": "relative",
+				"left": "10px",
 				"top": "10px",
-				"width": "200px",
+				"width": "150px",
 				"height": "auto",
 				"background-color": "#008",
 				"border": "solid 1px #333",
@@ -19,21 +19,7 @@
 		}
 	},
 	{
-		"name": "fbd2",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "0px",
-				"top": "100px",
-				"width": "100%",
-				"height": "100%",
-				"background-color": "#999"
-			}
-		},
-		"classes": ["abs"]
-	},
-	{
-		"name": "fnm3",
+		"name": "fnmEditorContent",
 		"attributes": {
 			"style": {
 				"position": "absolute",
@@ -41,19 +27,20 @@
 				"top": "100px",
 				"right": "100px",
 				"height": "100%",
-				"background-color": "#fff"
+				"background-color": "#9f9"
 			}
 		},
 		"classes": ["abs"]
 	},
+
 	{
-		"name": "fnm4",
+		"name": "fnmSaveAll",
 		"attributes": {
 			"style": {
-				"position": "absolute",
-				"left": "400px",
+				"position": "relative",
+				"left": "10px",
 				"top": "10px",
-				"width": "200px",
+				"width": "150px",
 				"height": "auto",
 				"background-color": "#008",
 				"border": "solid 1px #333",
@@ -63,23 +50,7 @@
 				"cursor": "pointer",
 				"color": "#fff"
 			}
-		},
-		"classes": ["abs"]
-	},
-	{
-		"name": "fbd5",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "700px",
-				"top": "10px",
-				"width": "200px",
-				"height": "60px",
-				"border": "solid 1px #333",
-				"border-radius": "2px"
-			}
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmStyleWidth",
@@ -91,8 +62,7 @@
 				"width": "100px",
 				"height": "20px"
 			}
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmStyleWidthUnit",
@@ -103,16 +73,14 @@
 				"top": "50px",
 				"height": "20px"
 			}
-		},
-		"classes": ["abs"]
+		}
 	},
 
 	{
 		"name": "fnmStyleWidthUnitOpt1",
 		"attributes": {
 			"value": "px"
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmStyleWidthUnitOpt2",
@@ -123,14 +91,15 @@
 	},
 
 	{
-		"name": "fnm7",
+		"name": "fnmStyleWidthText",
 		"attributes": {
 			"style": {
 				"position": "absolute",
 				"left": "240px",
 				"top": "50px",
 				"width": "100px",
-				"height": "20px"
+				"height": "20px",
+				"background-color": "#ff0"
 			}
 		},
 		"classes": ["abs"]

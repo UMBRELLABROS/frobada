@@ -1,0 +1,18 @@
+[
+	{
+		"nodeName": "DIV",
+		"name": "fnmBoxSelectText",
+		"childNodes": [
+			{ "nodeName": "INPUT", "name": "fnmInputBox", "childNodes": [] },
+			{
+				"nodeName": "SELECT",
+				"name": "fnmSelect",
+				"childNodes": [
+					{ "nodeName": "OPTION", "name": "fnmStyleWidthUnitOpt1", "childNodes": [] },
+					{ "nodeName": "OPTION", "name": "fnmStyleWidthUnitOpt2", "childNodes": [] }
+				]
+			},
+			{ "nodeName": "DIV", "name": "fnmDescription", "childNodes": [] }
+		]
+	}
+]

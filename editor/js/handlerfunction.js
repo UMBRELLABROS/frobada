@@ -13,6 +13,7 @@ var HandlerFunction = function() {
 	function addContainer(event) {
 		// put new container to display
 		var destination = event.target.getAttribute('data-destination');
+		// error message
 		addElementToParent($(destination));
 	}
 
@@ -20,7 +21,8 @@ var HandlerFunction = function() {
 	function addElementToParent(destination) {
 		// New element
 		div = dCE('div');
-		div.id = 'cfbd' + (counter++).toString(); // get next ID
+		div.id = 'csfbd' + (counter++).toString(); // get next ID for ids
+		div.name = 'cnfbd' + (counter++).toString(); // get next ID for names
 		div.style.width = '90px';
 		div.style.height = '100px';
 		div.style.backgroundColor = '#d00';
@@ -93,5 +95,171 @@ var HandlerFunction = function() {
 		return null;
 	}
 
-	function saveDOM(event) {}
+	/**
+	 * Save the Elements in the editor playfield
+	 * @param {} event
+	 */
+	function saveDOM(event) {
+		var source = event.target.getAttribute('data-source');
+		var elements = [];
+		var structure = [];
+		var action = [];
+		elements = scanDOM($(source), elements);
+		structure = scanDOMStructure($(source), structure);
+		styles = scanDOMStyles(elements);
+		action = scanDOMAction(elements);
+		console.log(JSON.stringify(structure));
+
+		event.cancelBubble = true;
+	}
+
+	/**
+	 * Scan for DOM elements
+	 * @param {*} source
+	 * @param {*} elements
+	 */
+	function scanDOM(source, elements) {
+		var nodes = source.childNodes;
+		nodes.forEach(element => {
+			if (element.nodeName == 'DIV') {
+				elements.push(element);
+				if (element.childNodes.length > 0) {
+					elements = scanDOM(element, elements);
+				}
+			}
+			// add more elements
+		});
+		return elements;
+	}
+
+	/**
+	 *
+	 * @param {*} source
+	 * @param {*} structure
+	 */
+	function scanDOMStructure(source, structure) {
+		var nodes = source.childNodes;
+		nodes.forEach(element => {
+			if (element.nodeName == 'DIV') {
+				var objDIV = {
+					nodeName: 'DIV',
+					name: element.name,
+					childNodes: []
+				};
+				structure.push(objDIV);
+				if (element.childNodes.length > 0) {
+					objDIV.childNodes = scanDOMStructure(element, []);
+				}
+			}
+			// add more elements
+		});
+		return structure;
+	}
+
+	/**
+	 * scan the DIVs for programmed styles
+	 * @param {*} elements
+	 */
+	function scanDOMStyles(elements) {
+		// string has only numbers
+		// ^ start [0-9] numbers + more of that kind $ end
+		var reg = new RegExp('^[0-9]+$');
+		var divStyles = [];
+
+		// for each DIV scan the style properties !=""
+		elements.forEach(element => {
+			var newObj = {};
+			newObj.name = element.name;
+			newObj.attributes = {};
+			if (element.value) {
+				newObj.attributes.value = element.valeu;
+			}
+			newObj.attributes.style = {};
+			var styles = element.style; // read the inline styles
+			Object.keys(styles).forEach(style => {
+				// new styles without the number-list
+				if (styles[style] && !reg.test(style)) {
+					var value = styles[style];
+					value = convertStyles(style, value);
+					newObj.attributes.style[style] = value; // store to object
+					//console.log(style + ' : ' + value); // key + value
+				}
+			});
+			divStyles.push(newObj);
+		});
+		return divStyles;
+	}
+
+	/**
+	 * scan the elements for actions
+	 * @param {*} elements
+	 */
+	function scanDOMAction(elements) {
+		var divActions = [];
+		// get the id
+		// get the data-attributes
+		// get the functions
+		// get the innerHTML
+		elements.forEach(element => {
+			var newObj = {};
+			newObj.name = element.name;
+			newObj.id = element.id;
+			if (element.innerHTML) {
+				newObj.innerHTML = element.innerHTML;
+			}
+			divActions.push(newObj);
+		});
+		return divActions;
+	}
+
+	/**
+	 * special for some styles
+	 * @param {} style
+	 * @param {*} value
+	 */
+	function convertStyles(style, value) {
+		if (style == 'backgroundColor' || style == 'color') {
+			value = colorToHex(value);
+		}
+		return value;
+	}
+
+	/**
+	 * convert rgb() to HEX
+	 * @param {*} color
+	 */
+	function colorToHex(color) {
+		// Convert any CSS color to a hex representation
+		// Examples:
+		// colorToHex('red')            # '#ff0000'
+		// colorToHex('rgb(255, 0, 0)') # '#ff0000'
+		var rgba = colorToRGBA(color);
+		var hex = [0, 1, 2]
+			.map(function(idx) {
+				return byteToHex(rgba[idx]);
+			})
+			.join('');
+		return '#' + hex;
+	}
+	function colorToRGBA(color) {
+		// Returns the color as an array of [r, g, b, a] -- all range from 0 - 255
+		// color must be a valid canvas fillStyle. This will cover most anything
+		// you'd want to use.
+		// Examples:
+		// colorToRGBA('red')  # [255, 0, 0, 255]
+		// colorToRGBA('#f00') # [255, 0, 0, 255]
+		var cvs, ctx;
+		cvs = document.createElement('canvas');
+		cvs.height = 1;
+		cvs.width = 1;
+		ctx = cvs.getContext('2d');
+		ctx.fillStyle = color;
+		ctx.fillRect(0, 0, 1, 1);
+		return ctx.getImageData(0, 0, 1, 1).data;
+	}
+
+	function byteToHex(num) {
+		// Turns a number (0-255) into a 2-character hex number (00-ff)
+		return ('0' + num.toString(16)).slice(-2);
+	}
 };

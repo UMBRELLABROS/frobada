@@ -1,113 +1,69 @@
 [
 	{
-		"id": "fbd101",
-		"name": "fnm1",
+		"id": "fbdAddNewContainer",
+		"name": "fnmAddNewContainer",
 		"data": {
-			"destination": "fbd103"
+			"destination": "fbdEditorContent"
 		},
 		"classes": ["abs"],
 		"events": [{ "click": "addContainer" }],
 		"innerHTML": "new container"
 	},
+	{ "id": "fbdEditorContent", "name": "fnmEditorContent", "events": [], "innerHTML": "" },
 	{
-		"id": "fbd102",
-		"name": "fnm2",
-		"events": [],
-		"innerHTML": ""
-	},
-	{ "id": "fbd103", "name": "fnm3", "events": [], "innerHTML": "" },
-	{
-		"id": "fbd104",
-		"name": "fnm4",
+		"id": "fbdSaveAll",
+		"name": "fnmSaveAll",
 		"data": {
-			"source": "fbd103"
+			"source": "fbdEditorContent"
 		},
 		"events": [{ "click": "saveDOM" }],
-		"innerHTML": "save"
+		"innerHTML": "save all"
 	},
-	{
-		"id": "fbd105",
-		"name": "fnm5",
-		"data": {},
-		"events": [],
-		"innerHTML": ""
-	},
+
 	{
 		"id": "fbdStyleWidth",
-		"name": "fnmStyleWidth",
-		"data": {},
-		"events": [],
-		"innerHTML": ""
+		"name": "fnmStyleWidth"
 	},
 	{
 		"id": "fbdStyleWidthUnit",
-		"name": "fnmStyleWidthUnit",
-		"data": {},
-		"events": [],
-		"innerHTML": ""
+		"name": "fnmStyleWidthUnit"
 	},
 	{
 		"id": "fbdStyleWidthUnitOpt1",
 		"name": "fnmStyleWidthUnitOpt1",
-		"data": {},
-		"events": [],
 		"innerHTML": "px"
 	},
 	{
 		"id": "fbdStyleWidthUnitOpt2",
 		"name": "fnmStyleWidthUnitOpt2",
-		"data": {},
-		"events": [],
 		"innerHTML": "%"
 	},
 	{
-		"id": "fbd107",
-		"name": "fnm7",
-		"data": {},
-		"events": [],
+		"id": "fbdStyleWidthText",
+		"name": "fnmStyleWidthText",
 		"innerHTML": "width"
 	},
 	{
 		"id": "fbdStyleHeight",
-		"name": "fnmStyleHeight",
-		"data": {},
-		"events": [],
-		"innerHTML": ""
+		"name": "fnmStyleHeight"
 	},
 	{
 		"id": "fbdStyleHeightLabel",
 		"name": "fnmStyleHeightLabel",
-		"data": {},
-		"events": [],
 		"innerHTML": "height"
 	},
 	{
 		"id": "fbdStyleHeightUnit",
-		"name": "fnmStyleHeightUnit",
-		"data": {},
-		"events": [],
-		"innerHTML": ""
+		"name": "fnmStyleHeightUnit"
 	},
 	{
 		"id": "fbdStyleHeightUnitOpt1",
 		"name": "fnmStyleHeightUnitOpt1",
-		"data": {},
-		"events": [],
 		"innerHTML": "px"
 	},
 	{
 		"id": "fbdStyleHeightUnitOpt2",
 		"name": "fnmStyleHeightUnitOpt2",
-		"data": {},
-		"events": [],
 		"innerHTML": "%"
-	},
-	{
-		"id": "fbdTempalteTest1",
-		"name": "fnmSubTemplateTest"
-	},
-	{
-		"id": "fbdTempalteTest2",
-		"name": "fnmSubTemplateTest"
 	}
 ]
