@@ -1,5 +1,16 @@
 [
 	{
+		"template": "2_element",
+		"ids": [
+			{ "id": "fbdWidthInput", "name": "fnmInputBox" },
+			{ "id": "fbdWidthSelect", "name": "fnmSelect" },
+			{ "id": "fbdWidthPx", "name": "fnmOpt1", "innerHTML": "px" },
+			{ "id": "fbdWidthPercent", "name": "fnmOpt2", "innerHTML": "%" },
+			{ "id": "fbdWidthDescription", "name": "fnmDescription" }
+		]
+	},
+
+	{
 		"id": "fbdAddNewContainer",
 		"name": "fnmAddNewContainer",
 		"data": {

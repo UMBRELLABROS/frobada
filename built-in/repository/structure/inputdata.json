@@ -3,16 +3,16 @@
 		"nodeName": "DIV",
 		"name": "fnmBoxSelectText",
 		"childNodes": [
-			{ "nodeName": "INPUT", "name": "fnmInputBox", "childNodes": [] },
+			{ "nodeName": "INPUT", "name": "fnmInputBox" },
 			{
 				"nodeName": "SELECT",
 				"name": "fnmSelect",
 				"childNodes": [
-					{ "nodeName": "OPTION", "name": "fnmStyleWidthUnitOpt1", "childNodes": [] },
-					{ "nodeName": "OPTION", "name": "fnmStyleWidthUnitOpt2", "childNodes": [] }
+					{ "nodeName": "OPTION", "name": "fnmOpt1" },
+					{ "nodeName": "OPTION", "name": "fnmOpt2" }
 				]
 			},
-			{ "nodeName": "DIV", "name": "fnmDescription", "childNodes": [] }
+			{ "nodeName": "DIV", "name": "fnmDescription" }
 		]
 	}
 ]
