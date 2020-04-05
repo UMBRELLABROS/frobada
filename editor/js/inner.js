@@ -12,7 +12,12 @@ var Inner = function() {
 	function writeHTML(elements) {
 		elements.map(element => {
 			if (element.innerHTML) {
+				// direct elements
 				$(element.id).innerHTML = element.innerHTML;
+			}
+			if (element.ids) {
+				// cascaded elements
+				writeHTML(element.ids);
 			}
 		});
 	}

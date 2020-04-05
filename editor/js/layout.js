@@ -6,37 +6,50 @@
  */
 var Layout = function() {
 	this.loadStructure = loadStructure;
-	var styles;
+	var templates;
 
-	function loadStructure(id, actionData, structureData, stylesData) {
-		styles = stylesData;
-		writeElements($(id), actionData, structureData);
+	function loadStructure(id, actionData, structureData, stylesData, templatesData) {
+		templates = templatesData;
+		writeElements($(id), structureData, actionData, stylesData);
 	}
 
 	/** load the array of HTML elements */
-	function writeElements(obj, actionData, structureData) {
+	function writeElements(obj, structureData, actionData, stylesData) {
 		if (!obj || !structureData) return;
-		actionData.map(action => {
+		structureData.map(structure => {
 			// get name from the actionData
 			// events only, if id is available
-			var structures = filter(structureData, 'name', action.name);
-			structures.map(structure => {
-				if (action.id) {
-					structure.id = action.id;
-				}
-				var item = writeElement(obj, structure);
-				// handle childNodes
-				writeElements(item, actionData, structure.childNodes);
-			});
+			var nextActionData = actionData;
+			var nextStylesData = stylesData;
+			var action = filter(actionData, 'name', structure.name)[0];
+
+			if (action && action.id) {
+				structure.id = action.id;
+			} else {
+				console.log('No id found for: ' + structure.name);
+			}
+			if (action && action.template) {
+				var element = filter(templates, 'element', action.template)[0];
+				structure.childNodes = element.template.structure;
+				// use inner action list as actionData
+				nextActionData = action.ids;
+				// read the styles from the template
+				nextStylesData = element.template.styles;
+			}
+			var item = writeElement(obj, structure, stylesData);
+			// handle all childNodes in a loop
+			if (structure.childNodes) {
+				writeElements(item, structure.childNodes, nextActionData, nextStylesData);
+			}
 		});
 	}
 
 	/** write one HTML element and attach to parent */
-	function writeElement(obj, element) {
+	function writeElement(obj, element, stylesData) {
 		var item = dCE(element.nodeName);
 		if (element.id) item.id = element.id;
 		// search style by element.name
-		var itemStyles = filter(styles, 'name', element.name)[0];
+		var itemStyles = filter(stylesData, 'name', element.name)[0];
 		if (itemStyles) writeStyle(item, itemStyles.attributes);
 		obj.appendChild(item);
 		return item;

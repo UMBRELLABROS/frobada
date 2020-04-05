@@ -44,5 +44,9 @@
 	{
 		"nodeName": "DIV",
 		"name": "fnmStyleHeightLabel"
+	},
+	{
+		"nodeName": "DIV",
+		"name": "fnmContainerWidth"
 	}
 ]

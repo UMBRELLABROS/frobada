@@ -29,8 +29,7 @@
 				"height": "100%",
 				"background-color": "#9f9"
 			}
-		},
-		"classes": ["abs"]
+		}
 	},
 
 	{
@@ -86,8 +85,7 @@
 		"name": "fnmStyleWidthUnitOpt2",
 		"attributes": {
 			"value": "%"
-		},
-		"classes": ["abs"]
+		}
 	},
 
 	{
@@ -101,8 +99,7 @@
 				"height": "20px",
 				"background-color": "#ff0"
 			}
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmStyleHeight",
@@ -114,8 +111,7 @@
 				"width": "100px",
 				"height": "20px"
 			}
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmStyleHeightUnit",
@@ -127,22 +123,19 @@
 				"width": "50px",
 				"height": "20px"
 			}
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmStyleHeightUnitOpt1",
 		"attributes": {
 			"value": "px"
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmStyleHeightUnitOpt2",
 		"attributes": {
 			"value": "%"
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmStyleHeightLabel",
@@ -154,8 +147,7 @@
 				"width": "100px",
 				"height": "20px"
 			}
-		},
-		"classes": ["abs"]
+		}
 	},
 	{
 		"name": "fnmSubTemplateTest",
@@ -169,7 +161,22 @@
 				"background-color": "#090",
 				"margin": "10px"
 			}
-		},
-		"classes": ["abs"]
+		}
+	},
+	{
+		"name": "fnmContainerWidth",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"right": "60px",
+				"top": "60px",
+				"width": "200px",
+				"height": "200px",
+				"background-color": "#ccc",
+				"margin": "10px",
+				"z-index": "100",
+				"border": "solid 1px #333"
+			}
+		}
 	}
 ]

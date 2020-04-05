@@ -1,12 +1,13 @@
 [
 	{
+		"name": "fnmContainerWidth",
 		"template": "2_element",
 		"ids": [
 			{ "id": "fbdWidthInput", "name": "fnmInputBox" },
 			{ "id": "fbdWidthSelect", "name": "fnmSelect" },
 			{ "id": "fbdWidthPx", "name": "fnmOpt1", "innerHTML": "px" },
 			{ "id": "fbdWidthPercent", "name": "fnmOpt2", "innerHTML": "%" },
-			{ "id": "fbdWidthDescription", "name": "fnmDescription" }
+			{ "id": "fbdWidthDescription", "name": "fnmDescription", "innerHTML": "width" }
 		]
 	},
 
