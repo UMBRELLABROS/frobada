@@ -4,13 +4,15 @@
  * loadStructure
  * loadStyles
  */
-var Layout = function() {
+var Layout = function () {
 	this.loadStructure = loadStructure;
 	var templates;
 
-	function loadStructure(id, actionData, structureData, stylesData, templatesData) {
+	function loadStructure(id, actionData, templatesData) {
 		templates = templatesData;
-		writeElements($(id), structureData, actionData, stylesData);
+		var element = filter(templates, 'element', actionData[0]['template'])[0];
+		var action = actionData[0].ids;
+		writeElements($(id), element.template.structure, action, element.template.styles);
 	}
 
 	/** load the array of HTML elements */

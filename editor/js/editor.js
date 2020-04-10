@@ -22,13 +22,7 @@ function callbackId(result) {
 	var element = JSON.parse(result);
 	console.log(element);
 	// build structure and add id to names
-	layout.loadStructure(
-		'fbdEditor',
-		element.action,
-		element.template.structure,
-		element.template.styles,
-		element.templates
-	);
+	layout.loadStructure('fbdEditor', element.action, element.templates);
 	// load all action data
 	inner.loadHTML(element.action);
 	attr.loadAttributes(element.action);

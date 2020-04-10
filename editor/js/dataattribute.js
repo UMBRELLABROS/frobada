@@ -2,7 +2,7 @@
  *
  * get and set the data-attributes
  */
-var DataAttribute = function() {
+var DataAttribute = function () {
 	this.loadAttributes = loadAttributes;
 
 	function loadAttributes(data) {
@@ -14,6 +14,10 @@ var DataAttribute = function() {
 		elements.map(element => {
 			if (element.data) {
 				writeAttribute($(element.id), element.data);
+			}
+			if (element.ids) {
+				// cascaded elements
+				writeAttributes(element.ids);
 			}
 		});
 	}

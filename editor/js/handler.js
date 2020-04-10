@@ -1,7 +1,7 @@
 /**
  * handle events of the element
  */
-var Handler = function() {
+var Handler = function () {
 	var funcs = new HandlerFunction();
 	this.loadFunctions = loadFunctions;
 
@@ -12,7 +12,13 @@ var Handler = function() {
 	/** load the function if available */
 	function writeFunctions(elements) {
 		elements.map(element => {
-			writeFunction($(element.id), element.events);
+			if (element.ids) {
+				// cascaded elements
+				writeFunctions(element.ids);
+			}
+			if (element.id) {
+				writeFunction($(element.id), element.events);
+			}
 		});
 	}
 

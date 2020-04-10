@@ -35,25 +35,29 @@ class Elements{
 		$actionJSON = $this->readJSONFile("repository/actions",$elementData['action']);
 		//print_r($actionJSON);	
 		// get all templates from within the json file
-		$templates =$this->getTemplates($actionJSON);
+		$templates =$this->getTemplates(json_decode($actionJSON,true));
 
 		// read line from templates table
-		$templateData = $this->tableTemplate->read("id", $elementData['template'])['message'][0];
+		// $templateData = $this->tableTemplate->read("id", $elementData['template'])['message'][0];
 		//print_r($templateData);
-		$structureJSON = $this->readJSONFile("repository/structure",$templateData['structure']);
-		$stylesJSON = $this->readJSONFile("repository/styles",$templateData['styles']);
-		$this->styles = json_decode($stylesJSON,true);
+		// $structureJSON = $this->readJSONFile("repository/structure",$templateData['structure']);
+		// $stylesJSON = $this->readJSONFile("repository/styles",$templateData['styles']);
+		// $this->styles = json_decode($stylesJSON,true);
 		// print_r($structureJSON);
 		// print_r($stylesJSON);
+
+		// *************************************************
+		// already included
+		// $template = array("element" =>$what ,"template"=> array(
+		// 	"structure"=>json_decode($structureJSON), 
+		// 	"styles"=> json_decode($stylesJSON)));
+		// array_push($templates,$template);
 		
 		// check for includes
 		$structureJSON = $this->checkForIncludes($structureJSON);
 
-		$ret =  array("action"=> json_decode($actionJSON), 
-			"template"=> array(
-			"structure"=>json_decode($structureJSON), 
-			"styles"=> $this->styles ),
-			"templates"=>$templates
+		$ret =  array("action"=> json_decode($actionJSON), 			
+					  "templates"=>$templates
 			) ;
 		// print_r(json_encode($ret));
 		echo json_encode($ret);
@@ -102,8 +106,8 @@ class Elements{
 	/**
 	 * Find the templates in the file and load them to templates
 	 */
-	private function getTemplates($actionJson){
-		$elements= json_decode($actionJson,true);	
+	private function getTemplates($elements){
+		// $elements= json_decode($actionJson,true);	
 		$templates=[];	
 		for ($i=0; $i <count($elements); $i++) { 
 			$object=$elements[$i];	
@@ -120,6 +124,13 @@ class Elements{
 					"styles"=> json_decode($stylesJSON)));
 				array_push($templates,$template);
 			}
+			if(isset($object['ids'])){
+				// recursive call
+				$subTemplates = $this->getTemplates($object['ids']);
+				foreach ($subTemplates as $template) {					
+					array_push($templates,$template);
+				}				
+			} 
 		}
 		return $templates;
 	}
