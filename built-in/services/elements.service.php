@@ -36,25 +36,10 @@ class Elements{
 		//print_r($actionJSON);	
 		// get all templates from within the json file
 		$templates =$this->getTemplates(json_decode($actionJSON,true));
-
-		// read line from templates table
-		// $templateData = $this->tableTemplate->read("id", $elementData['template'])['message'][0];
-		//print_r($templateData);
-		// $structureJSON = $this->readJSONFile("repository/structure",$templateData['structure']);
-		// $stylesJSON = $this->readJSONFile("repository/styles",$templateData['styles']);
-		// $this->styles = json_decode($stylesJSON,true);
-		// print_r($structureJSON);
-		// print_r($stylesJSON);
-
-		// *************************************************
-		// already included
-		// $template = array("element" =>$what ,"template"=> array(
-		// 	"structure"=>json_decode($structureJSON), 
-		// 	"styles"=> json_decode($stylesJSON)));
-		// array_push($templates,$template);
 		
 		// check for includes
-		$structureJSON = $this->checkForIncludes($structureJSON);
+		// cascade the structures
+		// $structureJSON = $this->checkForIncludes($structureJSON);
 
 		$ret =  array("action"=> json_decode($actionJSON), 			
 					  "templates"=>$templates

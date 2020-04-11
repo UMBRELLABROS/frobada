@@ -10,9 +10,16 @@ var Layout = function () {
 
 	function loadStructure(id, actionData, templatesData) {
 		templates = templatesData;
-		var element = filter(templates, 'element', actionData[0]['template'])[0];
-		var action = actionData[0].ids;
-		writeElements($(id), element.template.structure, action, element.template.styles);
+
+		// loop action array
+		actionData.map(action => {
+			var elements = filter(templates, 'element', action['template']);
+			// loop structure array
+			elements.map(element => {
+				var actionIds = action.ids;
+				writeElements($(id), element.template.structure, actionIds, element.template.styles);
+			});
+		});
 	}
 
 	/** load the array of HTML elements */
@@ -23,7 +30,7 @@ var Layout = function () {
 			// events only, if id is available
 			var nextActionData = actionData;
 			var nextStylesData = stylesData;
-			var action = filter(actionData, 'name', structure.name)[0];
+			var action = filter(actionData, 'name', structure.name)[0]; // unique value
 
 			if (action && action.id) {
 				structure.id = action.id;
@@ -31,7 +38,7 @@ var Layout = function () {
 				console.log('No id found for: ' + structure.name);
 			}
 			if (action && action.template) {
-				var element = filter(templates, 'element', action.template)[0];
+				var element = filter(templates, 'element', action.template)[0]; // unique value
 				structure.childNodes = element.template.structure;
 				// use inner action list as actionData
 				nextActionData = action.ids;
@@ -51,7 +58,7 @@ var Layout = function () {
 		var item = dCE(element.nodeName);
 		if (element.id) item.id = element.id;
 		// search style by element.name
-		var itemStyles = filter(stylesData, 'name', element.name)[0];
+		var itemStyles = filter(stylesData, 'name', element.name)[0]; // unique value
 		if (itemStyles) writeStyle(item, itemStyles.attributes);
 		obj.appendChild(item);
 		return item;
