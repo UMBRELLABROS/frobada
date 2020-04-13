@@ -1,0 +1,7 @@
+[
+	{
+		"name": "fnmSubAction",
+		"template": "3_template",
+		"ids": [{ "id": "fbdSubData", "name": "fnmSubData" }]
+	}
+]

@@ -33,14 +33,13 @@ class Elements{
 		// error handling
 		// read action.json		
 		$actionJSON = $this->readJSONFile("repository/actions",$elementData['action']);
-		//print_r($actionJSON);	
+		
+		// check for includes (i.e. "file":"...")	 	
+		$actionJSON = $this->checkForIncludes($actionJSON);
+
 		// get all templates from within the json file
 		$templates =$this->getTemplates(json_decode($actionJSON,true));
 		
-		// check for includes
-		// cascade the structures
-		// $structureJSON = $this->checkForIncludes($structureJSON);
-
 		$ret =  array("action"=> json_decode($actionJSON), 			
 					  "templates"=>$templates
 			) ;
@@ -65,27 +64,29 @@ class Elements{
 	}
 
 	/**
-	 * Check, if there are includes 
+	 * Check, if there are action includes 
 	 */
-	private function checkForIncludes($structureJSON){
+	private function checkForIncludes($actionJSON){
 		// convert to arrays (, true)
-		$elements= json_decode($structureJSON,true);		
-		for ($i=0; $i <count($elements); $i++) { 
-			$object=$elements[$i];					
-			if(isset($object['template'])){
-				$template= $object['template'];
-				// read structure and styles					
-				$styles= $this->readJSONFile("repository/styles",$template['styles']);	
-				array_push($this->styles,(json_decode($styles,true))[0]);
-				
-				$includeJSON = $this->readJSONFile("repository/structure",$template['structure']);								
-				// recursive
-				// code for recursive
-				// ###
-				$elements[$i] = json_decode($includeJSON,true);
-			}			
+		$elements= json_decode($actionJSON,true); // this is an array					
+		for($arrayIndex=0; $arrayIndex < count($elements); $arrayIndex++){		
+			$element = $elements[$arrayIndex];		
+			foreach ($element as $key => $value) {
+				// name, template, ids								
+				if($key=="ids"){
+					// dive into structure
+					$elements[$arrayIndex][$key] = json_decode($this->checkForIncludes(json_encode($value)), true);
+				}
+				if($key=="file"){
+					// include the external data
+					// remove the line and replace it
+					$subAction = $this->readJSONFile("repository/actions",$value);	
+					$action=json_decode($this->checkForIncludes($subAction),true);										
+					$elements[$arrayIndex] = $action[0];
+				}
+			}					
 		}
-		return json_encode($elements);
+		return json_encode($elements);		
 	}
 
 	/**
@@ -96,11 +97,11 @@ class Elements{
 		$templates=[];	
 		for ($i=0; $i <count($elements); $i++) { 
 			$object=$elements[$i];	
+			// get the structure and styles
 			if(isset($object['template'])){ 
 				// get structure and styles from the database
 				// read line from templates table
-				$templateData = $this->tableTemplate->read("id", $object['template'])['message'][0];
-				//print_r($templateData);
+				$templateData = $this->tableTemplate->read("name", $object['template'])['message'][0];								
 				$structureJSON = $this->readJSONFile("repository/structure",$templateData['structure']);
 				$stylesJSON = $this->readJSONFile("repository/styles",$templateData['styles']);
 				
@@ -109,13 +110,14 @@ class Elements{
 					"styles"=> json_decode($stylesJSON)));
 				array_push($templates,$template);
 			}
+			// cascaded elements
 			if(isset($object['ids'])){
 				// recursive call
 				$subTemplates = $this->getTemplates($object['ids']);
 				foreach ($subTemplates as $template) {					
 					array_push($templates,$template);
 				}				
-			} 
+			} 			
 		}
 		return $templates;
 	}

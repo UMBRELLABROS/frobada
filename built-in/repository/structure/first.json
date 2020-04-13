@@ -48,5 +48,9 @@
 	{
 		"nodeName": "DIV",
 		"name": "fnmContainerWidth"
+	},
+	{
+		"nodeName": "DIV",
+		"name": "fnmSubAction"
 	}
 ]

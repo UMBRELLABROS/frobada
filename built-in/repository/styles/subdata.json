@@ -1,0 +1,21 @@
+[
+	{
+		"name": "fnmSubData",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"right": "5px",
+				"top": "10px",
+				"width": "200px",
+				"height": "60px",
+				"background-color": "#900",
+				"border": "solid 1px #900",
+				"border-radius": "2px",
+				"boxShadow": "4px 4px 4px #999",
+				"text-align": "center",
+				"cursor": "pointer",
+				"color": "#ddd"
+			}
+		}
+	}
+]

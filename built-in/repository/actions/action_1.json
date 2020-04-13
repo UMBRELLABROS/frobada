@@ -1,11 +1,11 @@
 [
 	{
 		"name": "fnmMaster",
-		"template": "1_element",
+		"template": "1_template",
 		"ids": [
 			{
 				"name": "fnmContainerWidth",
-				"template": "2_element",
+				"template": "2_template",
 				"ids": [
 					{ "id": "fbdWidthInput", "name": "fnmInputBox" },
 					{ "id": "fbdWidthSelect", "name": "fnmSelect" },
@@ -14,7 +14,9 @@
 					{ "id": "fbdWidthDescription", "name": "fnmDescription", "innerHTML": "width" }
 				]
 			},
-
+			{
+				"file": "sub_action"
+			},
 			{
 				"id": "fbdAddNewContainer",
 				"name": "fnmAddNewContainer",

@@ -178,5 +178,15 @@
 				"border": "solid 1px #333"
 			}
 		}
+	},
+	{
+		"name": "fnmSubAction",
+		"attributes": {
+			"style": {
+				"position": "relative",
+				"right": "60px",
+				"top": "260px"
+			}
+		}
 	}
 ]
