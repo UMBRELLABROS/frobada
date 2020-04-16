@@ -1,6 +1,18 @@
 <?php
 $method = $_SERVER['REQUEST_METHOD'];
 
+
+/**
+ * Table data  operations
+ * 
+ * Funtions:
+ * create a new entry PUT 'tabledata/<data base>/<table>'
+ * update an entry PUT 'tabledata/<data base>/<table>/<column>/<identifier>'
+ * delete an entry DELETE 'tabledata/<data base>/<table>/<column>/<identifier>'
+ * read an entry GET 'tabledata/<data base>/<table>/<column>/<identifier>'
+ */
+
+
 // Read data from matches (see router.json)
 //echo($matches['name']);
 

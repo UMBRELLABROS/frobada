@@ -1,8 +1,9 @@
 /** store all editor event functions  */
-var HandlerFunction = function() {
+var HandlerFunction = function () {
 	this.Functions = [];
 	this.Functions['addContainer'] = addContainer;
 	this.Functions['saveDOM'] = saveDOM;
+	this.Functions['loadDOM'] = loadDOM;
 	// internal static variables
 	var counter = 0;
 	var bindings = [];
@@ -97,21 +98,53 @@ var HandlerFunction = function() {
 
 	/**
 	 * Save the Elements in the editor playfield
+	 * saves action, structure and styles
 	 * @param {} event
 	 */
 	function saveDOM(event) {
 		var source = event.target.getAttribute('data-source');
+		var destinationElement = event.target.getAttribute('data-destination');
+		var destination = $(destinationElement).value;
 		var elements = [];
 		var structure = [];
+		var styles = [];
 		var action = [];
 		elements = scanDOM($(source), elements);
 		structure = scanDOMStructure($(source), structure);
 		styles = scanDOMStyles(elements);
 		action = scanDOMAction(elements);
-		console.log(JSON.stringify(structure));
+		// console.log(JSON.stringify(structure));
+		// console.log(JSON.stringify(styles));
+		// save to structure & styles
+		var dtoStructure = new Ajax('http://localhost:1234/jsonfile/repository/structure/' + destination, serverResponse);
+		dtoStructure.put(JSON.stringify(structure));
+		var dtoStyles = new Ajax('http://localhost:1234/jsonfile/repository/styles/' + destination, serverResponse);
+		dtoStyles.put(JSON.stringify(styles));
+		// save to the data base
+		var dtoDataBase = new Ajax('http://localhost:1234/tabledata/editor/templates', serverResponse);
+		var formData = new FormData();
+		formData.append('name', 'n_tempate');
+		formData.append('structure', destination);
+		formData.append('styles', destination);
+		formData.append('description', '');
+		dtoDataBase.post(formData);
 
 		event.cancelBubble = true;
 	}
+
+	/**
+	 * Response from the server
+	 * @param {*} result
+	 */
+	function serverResponse(result) {
+		console.log(result);
+	}
+
+	/**
+	 * reload the selected DOM structure
+	 * @param {*} event
+	 */
+	function loadDOM(event) {}
 
 	/**
 	 * Scan for DOM elements
@@ -140,18 +173,15 @@ var HandlerFunction = function() {
 	function scanDOMStructure(source, structure) {
 		var nodes = source.childNodes;
 		nodes.forEach(element => {
-			if (element.nodeName == 'DIV') {
-				var objDIV = {
-					nodeName: 'DIV',
-					name: element.name,
-					childNodes: []
-				};
-				structure.push(objDIV);
-				if (element.childNodes.length > 0) {
-					objDIV.childNodes = scanDOMStructure(element, []);
-				}
+			// list all known elements
+			var objDIV = {
+				nodeName: element.nodeName.toUpperCase(), // DIVV, INPUT, SELECT, ...
+				name: element.name
+			};
+			structure.push(objDIV);
+			if (element.childNodes.length > 0) {
+				objDIV.childNodes = scanDOMStructure(element, []);
 			}
-			// add more elements
 		});
 		return structure;
 	}
@@ -235,7 +265,7 @@ var HandlerFunction = function() {
 		// colorToHex('rgb(255, 0, 0)') # '#ff0000'
 		var rgba = colorToRGBA(color);
 		var hex = [0, 1, 2]
-			.map(function(idx) {
+			.map(function (idx) {
 				return byteToHex(rgba[idx]);
 			})
 			.join('');

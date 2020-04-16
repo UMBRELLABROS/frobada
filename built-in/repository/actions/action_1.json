@@ -32,7 +32,8 @@
 				"id": "fbdSaveAll",
 				"name": "fnmSaveAll",
 				"data": {
-					"source": "fbdEditorContent"
+					"source": "fbdEditorContent",
+					"destination": "fbdSaveTemplate"
 				},
 				"events": [{ "click": "saveDOM" }],
 				"innerHTML": "save all"
@@ -83,6 +84,15 @@
 				"id": "fbdStyleHeightUnitOpt2",
 				"name": "fnmStyleHeightUnitOpt2",
 				"innerHTML": "%"
+			},
+			{
+				"id": "fbdSaveTemplate",
+				"name": "fnmSaveTemplate"
+			},
+			{
+				"id": "fbdSaveTemplateText",
+				"name": "fnmSaveTemplateText",
+				"innerHTML": "Save as:"
 			}
 		]
 	}

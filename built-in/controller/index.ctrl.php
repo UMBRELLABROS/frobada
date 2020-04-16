@@ -1,6 +1,9 @@
 <?php
 $method = $_SERVER['REQUEST_METHOD'];
 
+/**
+ * only for testing purposes
+ */
 
 switch($method){
     case "GET":

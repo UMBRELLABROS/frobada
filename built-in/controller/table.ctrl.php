@@ -1,6 +1,17 @@
 <?php
 $method = $_SERVER['REQUEST_METHOD'];
 
+/**
+ * table operations
+ * 
+ * 'table/mytest/users'
+ * 
+ * Funtions:
+ * create a table PUT 'table/<data base>/<table name>'
+ * delete a table DELETE 'table/<data base>/<table name>'
+
+ */
+
 // Read data from matches (see router.json)
 //echo($matches['name']);
 

@@ -2,6 +2,19 @@
 // get all infos for one dom element
 $method = $_SERVER['REQUEST_METHOD'];
 
+/**
+ * Element operations
+ * 
+ * Funtions:
+ *
+ * get a specified element from the database and load the complete json stucture
+ * with action, structure and styles
+ * GET 'elements/<data base>/<table>/<column>/<identifier>'
+ * 
+ * missing functions:
+ * save an element to the data base and to json folders
+ */
+
 // Read data from matches (see router.json)
 //
 

@@ -1,6 +1,18 @@
 <?php
 $method = $_SERVER['REQUEST_METHOD'];
 
+
+/**
+ * json file operations
+ *
+ * Funtions:
+ * create a json file [] PUT 'jsonfile/<repository>/<folder>/<filename (no extension)>'
+ * append an item to a json file POST 'jsonfile/<repository>/<folder>/<filename (no extension)>'
+ * delete a json file DELETE 'jsonfile/<repository>/<folder>/<filename (no extension)>'
+ * get a json file GET 'jsonfile/<repository>/<folder>/<filename (no extension)>'
+ */
+
+
 // Read data from matches (see router.json)
 // echo($matches['filename']);
 

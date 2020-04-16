@@ -46,7 +46,7 @@ class TableData{
             // Get the values (in the same order as $labelArray)
             $values = ArrayUtils::getOrderedValues($itemdata, $labelArray);            
             
-            $sql = "INSERT INTO users ($lables) VALUES ($qs)";
+            $sql = "INSERT INTO $this->table ($lables) VALUES ($qs)";
 			$this->conn->prepare($sql)->execute($values);
 			$newId = $this->conn->lastInsertId();
 

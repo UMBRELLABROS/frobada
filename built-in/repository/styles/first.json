@@ -188,5 +188,29 @@
 				"top": "260px"
 			}
 		}
+	},
+	{
+		"name": "fnmSaveTemplateText",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "600px",
+				"top": "20px",
+				"width": "90px"
+			}
+		}
+	},
+	{
+		"name": "fnmSaveTemplate",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "700px",
+				"top": "20px",
+				"width": "90px",
+				"padding": "5px"
+			},
+			"value": "save_test"
+		}
 	}
 ]

@@ -1,8 +1,16 @@
 <?php
 $method = $_SERVER['REQUEST_METHOD'];
+/**
+ * Data base operations
+ * 
+ * Funtions:
+ * create a data base PUT 'database/<name of the new data base>'
+ * delete a data base DELETE 'database/<name of data base>'
+ * get all tables of data base GET 'database/<name of data base>'
+ */
 
 // Read data from matches (see router.json)
-//echo($matches['name']);
+// echo($matches['name']);
 
 
 // get the data from put, post, get, delete
