@@ -137,9 +137,9 @@ class TableData{
 		}
         $this->conn = null;
 	}
-
+	
 	/**
-     * delete an existing table by where ...
+     * read data by where & what 
      */
     public function read($where, $what){
         $this->connect();
@@ -164,6 +164,36 @@ class TableData{
 			}
 
             $message = $geta;
+            $ret = array('message' => $message, "error"=>$error);
+        }
+        catch(PDOException $e){            
+            $ret = array('message' => $message, "error"=>$e->getMessage());           
+		}   
+		if(!$this->silent){ 
+			echo(json_encode($ret) );         
+		}
+		else{
+			return $ret;
+		}
+        $this->conn = null;
+	}
+
+	/**
+     * count the rows by where & what 
+     */
+    public function count($where, $what){
+        $this->connect();
+		$message="";
+		$error=null;
+        try {
+			// setting the PDO error mode to exception
+			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+			$sql = "SELECT * FROM $this->table WHERE $where = '$what'";		
+			if(!$this->conn->query($sql))
+				$error="Syntax error: ".$sql;
+
+            $message = $this->conn->query($sql)->rowCount();
             $ret = array('message' => $message, "error"=>$error);
         }
         catch(PDOException $e){            

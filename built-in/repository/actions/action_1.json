@@ -33,7 +33,8 @@
 				"name": "fnmSaveAll",
 				"data": {
 					"source": "fbdEditorContent",
-					"destination": "fbdSaveTemplate"
+					"destination": "fbdSaveElement",
+					"template": "fbdSaveTemplate"
 				},
 				"events": [{ "click": "saveDOM" }],
 				"innerHTML": "save all"
@@ -86,13 +87,22 @@
 				"innerHTML": "%"
 			},
 			{
+				"id": "fbdSaveElement",
+				"name": "fnmSaveElement"
+			},
+			{
+				"id": "fbdSaveElementText",
+				"name": "fnmSaveElementText",
+				"innerHTML": "Save element as:"
+			},
+			{
 				"id": "fbdSaveTemplate",
 				"name": "fnmSaveTemplate"
 			},
 			{
 				"id": "fbdSaveTemplateText",
 				"name": "fnmSaveTemplateText",
-				"innerHTML": "Save as:"
+				"innerHTML": "Save template as:"
 			}
 		]
 	}

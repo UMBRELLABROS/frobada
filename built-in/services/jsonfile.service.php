@@ -40,6 +40,7 @@ class JSONFile{
 		$file = "$this->repository/$jsonfile.json";							
 		if(!file_put_contents($file, json_encode($content))){
 			$error= "Error writing $file";
+			echo($error);
 		}
 		if(!$this->silent)
 			echo(json_encode( array('error'=>$error)));   

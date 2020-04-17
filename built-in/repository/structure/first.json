@@ -60,5 +60,13 @@
 	{
 		"nodeName": "DIV",
 		"name": "fnmSaveTemplateText"
+	},
+	{
+		"nodeName": "INPUT",
+		"name": "fnmSaveElement"
+	},
+	{
+		"nodeName": "DIV",
+		"name": "fnmSaveElementText"
 	}
 ]

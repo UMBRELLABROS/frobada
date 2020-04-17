@@ -105,29 +105,21 @@ var HandlerFunction = function () {
 		var source = event.target.getAttribute('data-source');
 		var destinationElement = event.target.getAttribute('data-destination');
 		var destination = $(destinationElement).value;
+		var templateElement = event.target.getAttribute('data-template');
+		var template = $(templateElement).value;
 		var elements = [];
 		var structure = [];
-		var styles = [];
-		var action = [];
 		elements = scanDOM($(source), elements);
 		structure = scanDOMStructure($(source), structure);
-		styles = scanDOMStyles(elements);
-		action = scanDOMAction(elements);
-		// console.log(JSON.stringify(structure));
-		// console.log(JSON.stringify(styles));
-		// save to structure & styles
-		var dtoStructure = new Ajax('http://localhost:1234/jsonfile/repository/structure/' + destination, serverResponse);
-		dtoStructure.put(JSON.stringify(structure));
-		var dtoStyles = new Ajax('http://localhost:1234/jsonfile/repository/styles/' + destination, serverResponse);
-		dtoStyles.put(JSON.stringify(styles));
-		// save to the data base
-		var dtoDataBase = new Ajax('http://localhost:1234/tabledata/editor/templates', serverResponse);
-		var formData = new FormData();
-		formData.append('name', 'n_tempate');
-		formData.append('structure', destination);
-		formData.append('styles', destination);
-		formData.append('description', '');
-		dtoDataBase.post(formData);
+		var styles = scanDOMStyles(elements);
+		var action = scanDOMAction(elements);
+
+		// save to element (action & structure & styles)
+		var dtoElement = new Ajax('http://localhost:1234/elements/editor/elements/name/' + destination, serverResponse);
+		// build action
+		// template (style & structure)
+		var dto = { action: action, template: { element: template, styles: styles, structure: structure } };
+		dtoElement.put(JSON.stringify(dto));
 
 		event.cancelBubble = true;
 	}

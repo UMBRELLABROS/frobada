@@ -47,6 +47,57 @@ class Elements{
 		echo json_encode($ret);
 	}
 
+	/**
+	 * write the structure elements to tables and json files
+	 */
+	public function write($where, $what, $content){
+		// read out action / template{structure, styles}
+		$action =$content['action'];
+		$template =$content['template'];
+		$styles = $template['styles'];
+		$structure = $template['structure'];
+		$templateName = $template['element'];
+		// element name is $what
+		// template name is $templateName
+
+		// test if template exists
+		$numTemplates = $this->tableTemplate->count("name", $templateName)['message'];
+		// insert or update template and save styles & structrue
+		$templateContent=array("name"=>$templateName,"structure"=>$templateName,"styles"=>$templateName,"description"=>"");
+		if($numTemplates == 0){
+			$ret= $this->tableTemplate->insert($templateContent);
+			if($ret['error'])
+				echo($ret['error']);
+			$templateId = $ret['id'];				
+		}
+		else{
+			$ret= $this->tableTemplate->update("name", $templateName,$templateContent);
+			if($ret['error'])
+				echo($ret['error']);
+			$data= $this->tableTemplate->read("name", $templateName)['message'][0];			
+			$templateId = $data['id'];
+		}
+
+
+		// test if element exists
+		$numElements = $this->tableElement->count($where, $what)['message'];
+		// insert or update element and save action
+		$elementContent=array("name"=>$what,"action"=>$what,"template"=>$templateId,"description"=>"");
+		if($numElements==0){
+			$ret= $this->tableElement->insert($elementContent);
+			if($ret['error'])
+				echo($ret['error']);
+		}
+		else{
+			$this->tableElement->update($where, $what, $elementContent);
+		}
+		
+		// save the json files (action, structure, styles)
+		$this->writeJSONFile("repository/actions",$what,$action);
+		$this->writeJSONFile("repository/structure",$templateName,$structure);
+		$this->writeJSONFile("repository/styles",$templateName,$styles);
+	}
+
 	
 	/**
 	 * Read the JSON file
@@ -57,6 +108,21 @@ class Elements{
 		$jsonFile->setSilent(true);
 		if($filename){
 			return  $jsonFile->read($filename);
+		}
+		else{
+			echo("No file ".$repository." ".$filename);
+		}		
+	}
+
+	/**
+	 * Read the JSON file
+	 */
+	private function writeJSONFile($repository, $filename, $content){
+		// file exists
+		$jsonFile = new JSONFile($repository);
+		$jsonFile->setSilent(true);
+		if($filename){		
+			$jsonFile->write($filename, $content);
 		}
 		else{
 			echo("No file ".$repository." ".$filename);

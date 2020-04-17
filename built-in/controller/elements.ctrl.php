@@ -34,6 +34,7 @@ switch($ctrl->getMethod()){
     break;
 	case "PUT":       
 		// write the element
+		$elements->write($matches['where'], $matches['what'], $ctrl->object);
     break;
     case "DELETE":       
     break;

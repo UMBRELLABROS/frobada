@@ -196,7 +196,8 @@
 				"position": "absolute",
 				"left": "600px",
 				"top": "20px",
-				"width": "90px"
+				"width": "90px",
+				"font-size": "10px"
 			}
 		}
 	},
@@ -207,10 +208,35 @@
 				"position": "absolute",
 				"left": "700px",
 				"top": "20px",
-				"width": "90px",
+				"width": "80px",
 				"padding": "5px"
 			},
-			"value": "save_test"
+			"value": "test_template"
+		}
+	},
+	{
+		"name": "fnmSaveElementText",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "800px",
+				"top": "20px",
+				"width": "90px",
+				"font-size": "10px"
+			}
+		}
+	},
+	{
+		"name": "fnmSaveElement",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "900px",
+				"top": "20px",
+				"width": "80px",
+				"padding": "5px"
+			},
+			"value": "test_element"
 		}
 	}
 ]
