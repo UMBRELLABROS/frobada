@@ -52,14 +52,14 @@ var HandlerFunction = function () {
 		var bindingData = [
 			{
 				attribute: 'width',
-				ids: [$('fbdStyleWidth'), $('fbdStyleWidthUnit')],
+				ids: [$('fbdWidthInput'), $('fbdWidthSelect')],
 				events: ['keyup', 'change'],
 				regex: /([0-9]*)(px|pt|em|%|vw)/,
 				join: [0, 1]
 			},
 			{
 				attribute: 'height',
-				ids: [$('fbdStyleHeight'), $('fbdStyleHeightUnit')],
+				ids: [$('fbdHeightInput'), $('fbdHeightSelect')],
 				events: ['keyup', 'change'],
 				regex: /([0-9]*)(px|pt|em|%|vh)/,
 				join: [0, 1]

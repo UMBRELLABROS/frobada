@@ -1,0 +1,25 @@
+[
+	{
+		"name": "fnmInputBox",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "60px",
+				"width": "100px",
+				"background-color": "#ccc"
+			}
+		}
+	},
+	{
+		"name": "fnmDescription",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "0px",
+				"width": "58px",
+				"color": "#666",
+				"font-size": "10px"
+			}
+		}
+	}
+]

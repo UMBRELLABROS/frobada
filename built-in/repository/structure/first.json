@@ -11,62 +11,24 @@
 		"nodeName": "DIV",
 		"name": "fnmEditorContent"
 	},
-
-	{
-		"nodeName": "INPUT",
-		"name": "fnmStyleWidth"
-	},
-
-	{
-		"nodeName": "SELECT",
-		"name": "fnmStyleWidthUnit",
-		"childNodes": [
-			{ "nodeName": "OPTION", "name": "fnmStyleWidthUnitOpt1" },
-			{ "nodeName": "OPTION", "name": "fnmStyleWidthUnitOpt2" }
-		]
-	},
-	{
-		"nodeName": "DIV",
-		"name": "fnmStyleWidthText"
-	},
-	{
-		"nodeName": "INPUT",
-		"name": "fnmStyleHeight"
-	},
-	{
-		"nodeName": "SELECT",
-		"name": "fnmStyleHeightUnit",
-		"childNodes": [
-			{ "nodeName": "OPTION", "name": "fnmStyleHeightUnitOpt1" },
-			{ "nodeName": "OPTION", "name": "fnmStyleHeightUnitOpt2" }
-		]
-	},
-	{
-		"nodeName": "DIV",
-		"name": "fnmStyleHeightLabel"
-	},
 	{
 		"nodeName": "DIV",
 		"name": "fnmContainerWidth"
 	},
 	{
 		"nodeName": "DIV",
+		"name": "fnmContainerHeight"
+	},
+	{
+		"nodeName": "DIV",
 		"name": "fnmSubAction"
 	},
 	{
-		"nodeName": "INPUT",
-		"name": "fnmSaveTemplate"
+		"nodeName": "DIV",
+		"name": "fnmContainerElement"
 	},
 	{
 		"nodeName": "DIV",
-		"name": "fnmSaveTemplateText"
-	},
-	{
-		"nodeName": "INPUT",
-		"name": "fnmSaveElement"
-	},
-	{
-		"nodeName": "DIV",
-		"name": "fnmSaveElementText"
+		"name": "fnmContainerTemplate"
 	}
 ]

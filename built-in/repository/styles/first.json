@@ -4,11 +4,11 @@
 		"attributes": {
 			"style": {
 				"position": "relative",
-				"left": "10px",
-				"top": "10px",
+				"left": "5px",
+				"top": "5px",
 				"width": "150px",
 				"height": "auto",
-				"background-color": "#008",
+				"background-color": "#668",
 				"border": "solid 1px #333",
 				"border-radius": "2px",
 				"boxShadow": "4px 4px 4px #666",
@@ -23,9 +23,9 @@
 		"attributes": {
 			"style": {
 				"position": "absolute",
-				"left": "100px",
+				"left": "0px",
 				"top": "100px",
-				"right": "100px",
+				"right": "300px",
 				"height": "100%",
 				"background-color": "#9f9"
 			}
@@ -37,11 +37,11 @@
 		"attributes": {
 			"style": {
 				"position": "relative",
-				"left": "10px",
-				"top": "10px",
+				"left": "5px",
+				"top": "5px",
 				"width": "150px",
 				"height": "auto",
-				"background-color": "#008",
+				"background-color": "#668",
 				"border": "solid 1px #333",
 				"border-radius": "2px",
 				"boxShadow": "4px 4px 4px #666",
@@ -51,104 +51,7 @@
 			}
 		}
 	},
-	{
-		"name": "fnmStyleWidth",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "100px",
-				"top": "50px",
-				"width": "100px",
-				"height": "20px"
-			}
-		}
-	},
-	{
-		"name": "fnmStyleWidthUnit",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "200px",
-				"top": "50px",
-				"height": "20px"
-			}
-		}
-	},
 
-	{
-		"name": "fnmStyleWidthUnitOpt1",
-		"attributes": {
-			"value": "px"
-		}
-	},
-	{
-		"name": "fnmStyleWidthUnitOpt2",
-		"attributes": {
-			"value": "%"
-		}
-	},
-
-	{
-		"name": "fnmStyleWidthText",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "240px",
-				"top": "50px",
-				"width": "100px",
-				"height": "20px",
-				"background-color": "#ff0"
-			}
-		}
-	},
-	{
-		"name": "fnmStyleHeight",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "300px",
-				"top": "50px",
-				"width": "100px",
-				"height": "20px"
-			}
-		}
-	},
-	{
-		"name": "fnmStyleHeightUnit",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "400px",
-				"top": "50px",
-				"width": "50px",
-				"height": "20px"
-			}
-		}
-	},
-	{
-		"name": "fnmStyleHeightUnitOpt1",
-		"attributes": {
-			"value": "px"
-		}
-	},
-	{
-		"name": "fnmStyleHeightUnitOpt2",
-		"attributes": {
-			"value": "%"
-		}
-	},
-	{
-		"name": "fnmStyleHeightLabel",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "460px",
-				"top": "50px",
-				"width": "100px",
-				"height": "20px"
-			}
-		}
-	},
 	{
 		"name": "fnmSubTemplateTest",
 		"attributes": {
@@ -168,14 +71,20 @@
 		"attributes": {
 			"style": {
 				"position": "absolute",
-				"right": "60px",
-				"top": "60px",
-				"width": "200px",
-				"height": "200px",
-				"background-color": "#ccc",
-				"margin": "10px",
-				"z-index": "100",
-				"border": "solid 1px #333"
+				"left": "200px",
+				"top": "5px",
+				"z-index": "100"
+			}
+		}
+	},
+	{
+		"name": "fnmContainerHeight",
+		"attributes": {
+			"style": {
+				"position": "absolute",
+				"left": "200px",
+				"top": "29px",
+				"z-index": "100"
 			}
 		}
 	},
@@ -190,53 +99,25 @@
 		}
 	},
 	{
-		"name": "fnmSaveTemplateText",
+		"name": "fnmContainerElement",
 		"attributes": {
 			"style": {
 				"position": "absolute",
-				"left": "600px",
-				"top": "20px",
-				"width": "90px",
-				"font-size": "10px"
+				"right": "10px",
+				"width": "250px",
+				"top": "20px"
 			}
 		}
 	},
 	{
-		"name": "fnmSaveTemplate",
+		"name": "fnmContainerTemplate",
 		"attributes": {
 			"style": {
 				"position": "absolute",
-				"left": "700px",
-				"top": "20px",
-				"width": "80px",
-				"padding": "5px"
-			},
-			"value": "test_template"
-		}
-	},
-	{
-		"name": "fnmSaveElementText",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "800px",
-				"top": "20px",
-				"width": "90px",
-				"font-size": "10px"
+				"right": "10px",
+				"width": "250px",
+				"top": "50px"
 			}
-		}
-	},
-	{
-		"name": "fnmSaveElement",
-		"attributes": {
-			"style": {
-				"position": "absolute",
-				"left": "900px",
-				"top": "20px",
-				"width": "80px",
-				"padding": "5px"
-			},
-			"value": "test_element"
 		}
 	}
 ]

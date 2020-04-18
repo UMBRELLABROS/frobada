@@ -37,6 +37,9 @@ var Layout = function () {
 			} else {
 				console.log('No id found for: ' + structure.name);
 			}
+			if (action && action.value) {
+				structure.value = action.value;
+			}
 			if (action && action.template) {
 				var element = filter(templates, 'element', action.template)[0]; // unique value
 				structure.childNodes = element.template.structure;
@@ -57,8 +60,13 @@ var Layout = function () {
 	function writeElement(obj, element, stylesData) {
 		var item = dCE(element.nodeName);
 		if (element.id) item.id = element.id;
+
 		// search style by element.name
 		var itemStyles = filter(stylesData, 'name', element.name)[0]; // unique value
+
+		if (element.value) {
+			itemStyles.attributes.value = element.value;
+		}
 		if (itemStyles) writeStyle(item, itemStyles.attributes);
 		obj.appendChild(item);
 		return item;

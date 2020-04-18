@@ -1,0 +1,109 @@
+[
+	{
+		"name": "fnmMaster",
+		"template": "1_template",
+		"ids": [
+			{
+				"name": "fnmContainerWidth",
+				"template": "2_template",
+				"ids": [
+					{ "id": "fbdWidthInput", "name": "fnmInputBox" },
+					{ "id": "fbdWidthSelect", "name": "fnmSelect" },
+					{ "id": "fbdWidthPx", "name": "fnmOpt1", "innerHTML": "px" },
+					{ "id": "fbdWidthPercent", "name": "fnmOpt2", "innerHTML": "%" },
+					{ "id": "fbdWidthDescription", "name": "fnmDescription", "innerHTML": "width" }
+				]
+			},
+			{
+				"file": "sub_action"
+			},
+			{
+				"id": "fbdAddNewContainer",
+				"name": "fnmAddNewContainer",
+				"data": {
+					"destination": "fbdEditorContent"
+				},
+				"classes": ["abs"],
+				"events": [{ "click": "addContainer" }],
+				"innerHTML": "new container"
+			},
+			{ "id": "fbdEditorContent", "name": "fnmEditorContent", "events": [], "innerHTML": "" },
+			{
+				"id": "fbdSaveAll",
+				"name": "fnmSaveAll",
+				"data": {
+					"source": "fbdEditorContent",
+					"destination": "fbdSaveElement",
+					"template": "fbdSaveTemplate"
+				},
+				"events": [{ "click": "saveDOM" }],
+				"innerHTML": "save all"
+			},
+
+			{
+				"id": "fbdStyleWidth",
+				"name": "fnmStyleWidth"
+			},
+			{
+				"id": "fbdStyleWidthUnit",
+				"name": "fnmStyleWidthUnit"
+			},
+			{
+				"id": "fbdStyleWidthUnitOpt1",
+				"name": "fnmStyleWidthUnitOpt1",
+				"innerHTML": "px"
+			},
+			{
+				"id": "fbdStyleWidthUnitOpt2",
+				"name": "fnmStyleWidthUnitOpt2",
+				"innerHTML": "%"
+			},
+			{
+				"id": "fbdStyleWidthText",
+				"name": "fnmStyleWidthText",
+				"innerHTML": "width"
+			},
+			{
+				"id": "fbdStyleHeight",
+				"name": "fnmStyleHeight"
+			},
+			{
+				"id": "fbdStyleHeightLabel",
+				"name": "fnmStyleHeightLabel",
+				"innerHTML": "height"
+			},
+			{
+				"id": "fbdStyleHeightUnit",
+				"name": "fnmStyleHeightUnit"
+			},
+			{
+				"id": "fbdStyleHeightUnitOpt1",
+				"name": "fnmStyleHeightUnitOpt1",
+				"innerHTML": "px"
+			},
+			{
+				"id": "fbdStyleHeightUnitOpt2",
+				"name": "fnmStyleHeightUnitOpt2",
+				"innerHTML": "%"
+			},
+			{
+				"id": "fbdSaveElement",
+				"name": "fnmSaveElement"
+			},
+			{
+				"id": "fbdSaveElementText",
+				"name": "fnmSaveElementText",
+				"innerHTML": "Save element as:"
+			},
+			{
+				"id": "fbdSaveTemplate",
+				"name": "fnmSaveTemplate"
+			},
+			{
+				"id": "fbdSaveTemplateText",
+				"name": "fnmSaveTemplateText",
+				"innerHTML": "Save template as:"
+			}
+		]
+	}
+]

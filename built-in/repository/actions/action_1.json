@@ -15,6 +15,41 @@
 				]
 			},
 			{
+				"name": "fnmContainerHeight",
+				"template": "2_template",
+				"ids": [
+					{ "id": "fbdHeightInput", "name": "fnmInputBox" },
+					{ "id": "fbdHeightSelect", "name": "fnmSelect" },
+					{ "id": "fbdHeightPx", "name": "fnmOpt1", "innerHTML": "px" },
+					{ "id": "fbdHeightPercent", "name": "fnmOpt2", "innerHTML": "%" },
+					{ "id": "fbdHeightDescription", "name": "fnmDescription", "innerHTML": "height" }
+				]
+			},
+			{
+				"name": "fnmContainerElement",
+				"template": "5_template",
+				"ids": [
+					{ "id": "fbdSaveElement", "name": "fnmInputBox", "value": "test_element" },
+					{
+						"id": "fdbSaveElementText",
+						"name": "fnmDescription",
+						"innerHTML": "Save element as:"
+					}
+				]
+			},
+			{
+				"name": "fnmContainerTemplate",
+				"template": "5_template",
+				"ids": [
+					{ "id": "fbdSaveTemplate", "name": "fnmInputBox", "value": "test_template" },
+					{
+						"id": "fdbSaveTemplateText",
+						"name": "fnmDescription",
+						"innerHTML": "Save template as:"
+					}
+				]
+			},
+			{
 				"file": "sub_action"
 			},
 			{
@@ -38,71 +73,6 @@
 				},
 				"events": [{ "click": "saveDOM" }],
 				"innerHTML": "save all"
-			},
-
-			{
-				"id": "fbdStyleWidth",
-				"name": "fnmStyleWidth"
-			},
-			{
-				"id": "fbdStyleWidthUnit",
-				"name": "fnmStyleWidthUnit"
-			},
-			{
-				"id": "fbdStyleWidthUnitOpt1",
-				"name": "fnmStyleWidthUnitOpt1",
-				"innerHTML": "px"
-			},
-			{
-				"id": "fbdStyleWidthUnitOpt2",
-				"name": "fnmStyleWidthUnitOpt2",
-				"innerHTML": "%"
-			},
-			{
-				"id": "fbdStyleWidthText",
-				"name": "fnmStyleWidthText",
-				"innerHTML": "width"
-			},
-			{
-				"id": "fbdStyleHeight",
-				"name": "fnmStyleHeight"
-			},
-			{
-				"id": "fbdStyleHeightLabel",
-				"name": "fnmStyleHeightLabel",
-				"innerHTML": "height"
-			},
-			{
-				"id": "fbdStyleHeightUnit",
-				"name": "fnmStyleHeightUnit"
-			},
-			{
-				"id": "fbdStyleHeightUnitOpt1",
-				"name": "fnmStyleHeightUnitOpt1",
-				"innerHTML": "px"
-			},
-			{
-				"id": "fbdStyleHeightUnitOpt2",
-				"name": "fnmStyleHeightUnitOpt2",
-				"innerHTML": "%"
-			},
-			{
-				"id": "fbdSaveElement",
-				"name": "fnmSaveElement"
-			},
-			{
-				"id": "fbdSaveElementText",
-				"name": "fnmSaveElementText",
-				"innerHTML": "Save element as:"
-			},
-			{
-				"id": "fbdSaveTemplate",
-				"name": "fnmSaveTemplate"
-			},
-			{
-				"id": "fbdSaveTemplateText",
-				"name": "fnmSaveTemplateText",
-				"innerHTML": "Save template as:"
 			}
 		]
 	}
